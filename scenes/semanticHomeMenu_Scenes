@@ -1,0 +1,79 @@
+uid: semanticHomeMenu_Scenes
+tags: []
+props:
+  parameters:
+    - context: Text
+      label: UID of the scene to run
+      name: sceneUID
+      required: true
+      type: TEXT
+    - context: Text
+      label: Name (description) of the scene to run
+      name: sceneName
+      required: true
+      type: TEXT
+timestamp: Jul 31, 2023, 2:23:55 PM
+component: f7-card
+config:
+  noShadow: false
+  padding: false
+  style:
+    background: '=items[props.scene].state == "ON" ? "linear-gradient(to bottom right, rgba(230, 230, 0) 0%, rgba(255, 255, 255) 100%)" : "linear-gradient(to bottom right, rgba(255, 255, 255) 0%, rgba(255, 255, 255) 100%)"'
+    border-radius: var(--f7-card-expandable-border-radius)
+    box-shadow: 5px 5px 15px 1px rgba(0,0,0,0.05)
+    margin-left: 5px
+    margin-right: 5px
+    padding: 0px
+  stylesheet: >
+    .card-header:after {
+      display: none;
+    }
+slots:
+  content:
+    - component: f7-card-content
+      config:
+        style:
+          height: 4rem
+      slots:
+        default:
+          - component: oh-icon
+            config:
+              height: 36
+              icon: f7:rectangle_on_rectangle_angled
+              style:
+                color: '=items[props.scene].state == "ON" ? "orange" : "black"'
+                left: 20px
+                position: absolute
+                top: 25px
+          - component: Label
+            config:
+              style:
+                color: black
+                font-size: 15px
+                font-weight: 600
+                margin-left: 4rem
+                position: absolute
+                top: 20px
+              text: =props.sceneName
+          - component: Label
+            config:
+              style:
+                color: black
+                font-size: 10px
+                font-weight: 400
+                margin-left: 5rem
+                position: absolute
+                top: 45px
+              text: SCENE
+          - component: oh-button
+            config:
+              action: rule
+              actionRule: =props.sceneUID
+              style:
+                background: orange
+                border-radius: 20px
+                height: 40px
+                position: absolute
+                right: 40px
+                top: 30px
+                width: 40px
