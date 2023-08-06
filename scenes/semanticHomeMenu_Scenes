@@ -12,7 +12,13 @@ props:
       name: sceneName
       required: true
       type: TEXT
-timestamp: Jul 31, 2023, 2:23:55 PM
+    - context: Text
+      default: orange
+      label: colorScheme
+      name: colorScheme
+      required: true
+      type: TEXT
+timestamp: Jul 31, 2023, 4:54:18 PM
 component: f7-card
 config:
   noShadow: false
@@ -41,7 +47,7 @@ slots:
               height: 36
               icon: f7:rectangle_on_rectangle_angled
               style:
-                color: '=items[props.scene].state == "ON" ? "orange" : "black"'
+                color: =props.colorScheme
                 left: 20px
                 position: absolute
                 top: 25px
@@ -70,7 +76,7 @@ slots:
               action: rule
               actionRule: =props.sceneUID
               style:
-                background: orange
+                background: =props.colorScheme
                 border-radius: 20px
                 height: 40px
                 position: absolute
