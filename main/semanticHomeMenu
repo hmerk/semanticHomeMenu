@@ -3,15 +3,31 @@ tags:
   - improvements Nico_R and hmerk
 props:
   parameters:
+    - default: orange
+      description: ColorScheme for Widgets
+      label: Color
+      name: color
+      required: true
+      limitToOptions: true
+      options:
+        - label: Orange
+          value: orange
+        - label: Red
+          value: red
+        - label: Cyan
+          value: cyan
     - description: Set color for Bottom NavBar
       label: Bottom-Navbar-Color
       name: bnavColor
       required: false
       type: TEXT
-timestamp: Jul 31, 2023, 2:23:03 PM
+timestamp: Aug 5, 2023, 11:58:45 PM
 component: f7-block
 config:
   style:
+    --my-rgb-colorScheme: '=props.color =="red" ? "RGB(255,0,0)" : props.color =="cyan" ? "RGB(3,255,255)" : "RGB(255,153,0)"'
+    --my-hex-colorScheme: '=props.color =="red" ? "#FF0000" : props.color =="cyan" ? "#03FFFF" :"#FF9900"'
+    --my-text-colorScheme: =props.color
     --my-bottom-navbar-background: '=!props.bnavColor ? "RGB(96, 96, 96)" : props.bnavColor'
     background: =(themeOptions.dark=="light") ? ("white"):("black")
     height: 100vh
@@ -624,19 +640,6 @@ slots:
                 - component: oh-repeater
                   config:
                     cacheSource: true
-                    for: scene
-                    ruleTags: Scene
-                    sourceType: rulesWithTags
-                  slots:
-                    default:
-                      - component: widget:semanticHomeMenu_Scenes
-                        config:
-                          sceneName: =loop.scene.name
-                          sceneUID: =loop.scene.UID
-                          visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Scenes") ? true : false : false'
-                - component: oh-repeater
-                  config:
-                    cacheSource: true
                     fetchMetadata: semantics,metadata
                     for: securityGroup
                     itemTags: AlarmSystem
@@ -647,6 +650,23 @@ slots:
                         config:
                           securityGroup: =loop.securityGroup.name
                           visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Security") ? true : false : false'
+                - component: oh-repeater
+                  config:
+                    cacheSource: true
+                    for: scene
+                    ruleTags: Scene
+                    sourceType: rulesWithTags
+                  slots:
+                    default:
+                      - component: widget:semanticHomeMenu_Scenes
+                        config:
+                          colorScheme: var(--my-text-colorScheme)
+                          sceneName: =loop.scene.name
+                          sceneUID: =loop.scene.UID
+                          visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Scenes") ? true : false : false'
+                - component: widget:semanticHomeMenu_Energy
+                  config:
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Energy") ? true : false : false'
                 - component: f7-row
                   config:
                     class:
@@ -721,13 +741,59 @@ slots:
                                                         xsmall: 100
                                                       slots:
                                                         default:
-                                                          - component: widget:semanticHomeMenu_Lights
+                                                          - component: widget:semanticHomeMenu_Light
                                                             config:
-                                                              Title: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment + loop.equipmentItem.metadata.uiSemantics.config.preposition + loop.equipmentItem.metadata.uiSemantics.config.location : loop.equipmentItem.label"
+                                                              colorScheme: var(--my-text-colorScheme)
+                                                              rgbColorScheme: var(--my-rgb-colorScheme)
+                                                              hexColorScheme: var(--my-hex-colorScheme)
                                                               groupItem: =loop.equipmentItem.name
                                                               groupItemLabel: =loop.equipmentItem.label
-                                                              groupItemLocation: =loop.rooms.label
+                                                              groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                                               powerItem: = loop.lightPowerItem.name
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: Lightbulb
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: oh-repeater
+                                                config:
+                                                  cacheSource: true
+                                                  filter: '(loop.lightDimmerItem.type=="Dimmer") ? true : false'
+                                                  for: lightDimmerItem
+                                                  fragment: true
+                                                  groupItem: =loop.equipmentItem.name
+                                                  sourceType: itemsInGroup
+                                                slots:
+                                                  default:
+                                                    - component: f7-col
+                                                      config:
+                                                        class:
+                                                          - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                                                        large: 50
+                                                        medium: 50
+                                                        small: 90
+                                                        style:
+                                                          overflow: hidden
+                                                        width: 100
+                                                        xlarge: 33
+                                                        xsmall: 100
+                                                      slots:
+                                                        default:
+                                                          - component: widget:semanticHomeMenu_DimmableLight
+                                                            config:
+                                                              colorScheme: var(--my-text-colorScheme)
+                                                              rgbColorScheme: var(--my-rgb-colorScheme)
+                                                              hexColorScheme: var(--my-hex-colorScheme)
+                                                              groupItem: =loop.equipmentItem.name
+                                                              groupItemLabel: =loop.equipmentItem.label
+                                                              groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                              dimmerItem: = loop.lightDimmerItem.name
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -775,14 +841,16 @@ slots:
                                                               xsmall: 100
                                                             slots:
                                                               default:
-                                                                - component: widget:semanticHomeMenu_Rollershutters
+                                                                - component: widget:semanticHomeMenu_Rollershutter
                                                                   config:
+                                                                    colorScheme: var(--my-text-colorScheme)
+                                                                    rgbColorScheme: var(--my-rgb-colorScheme)
+                                                                    hexColorScheme: var(--my-hex-colorScheme)
                                                                     RollerItem: =loop.shutterItem.name
                                                                     RollerMode: = loop.modeItem.name
-                                                                    Title: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment + loop.equipmentItem.metadata.uiSemantics.config.preposition + loop.equipmentItem.metadata.uiSemantics.config.location : loop.equipmentItem.label"
                                                                     groupItem: =loop.equipmentItem.name
                                                                     groupItemLabel: =loop.equipmentItem.label
-                                                                    groupItemLocation: =loop.rooms.label
+                                                                    groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -810,10 +878,12 @@ slots:
                                                   default:
                                                     - component: widget:semanticHomeMenu_RadiatorControl
                                                       config:
-                                                        Title: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment + loop.equipmentItem.metadata.uiSemantics.config.preposition + loop.equipmentItem.metadata.uiSemantics.config.location : loop.equipmentItem.label"
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        rgbColorScheme: var(--my-rgb-colorScheme)
+                                                        hexColorScheme: var(--my-hex-colorScheme)
                                                         groupItem: =loop.equipmentItem.name
-                                                        groupItemLabel: =loop.radiatorItem.label
-                                                        groupItemLocation: =loop.rooms.label
+                                                        groupItemLabel: =loop.equipmentItem.label
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -863,8 +933,9 @@ slots:
                                                               default:
                                                                 - component: widget:semanticHomeMenu_HVAC
                                                                   config:
-                                                                    Title: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment + loop.equipmentItem.metadata.uiSemantics.config.preposition + loop.equipmentItem.metadata.uiSemantics.config.location : loop.equipmentItem.label"
                                                                     groupItem: =loop.equipmentItem.name
+                                                                    groupItemLabel: =loop.equipmentItem.label
+                                                                    groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                                                     modeItem: =loop.hvacModeItem.name
                                                                     powerItem: =loop.hvacPowerItem.name
           - component: f7-block
@@ -931,7 +1002,7 @@ slots:
                                       default:
                                         - component: Label
                                           config:
-                                            text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state))
+                                            text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state) + Number(items.gSmokeAlarm.state))
                                   - component: Label
                                     config:
                                       text: Security
