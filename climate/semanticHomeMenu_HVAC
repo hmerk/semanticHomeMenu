@@ -1,0 +1,390 @@
+uid: semanticHomeMenu_HVAC
+tags: []
+props:
+  parameters:
+    - context: item
+      description: Calculated by oh-repeater
+      label: HVAC Equipment Group
+      name: groupItem
+      required: false
+      type: TEXT
+    - description: Calculated by oh-repeater
+      label: HVAC Equipment Group Label
+      name: groupItemLabel
+      required: false
+      type: TEXT
+    - description: Calculated by oh-repeater
+      label: HVAC Equipment Group Location
+      name: groupItemLocation
+      required: false
+      type: TEXT
+    - context: Text
+      default: orange
+      label: ColorScheme
+      name: colorScheme
+      required: true
+      type: TEXT
+    - context: Text
+      default: RGB(255,153,0)
+      label: RGB ColorScheme
+      name: rgbColorScheme
+      required: true
+      type: TEXT
+    - context: Text
+      default: FF9900
+      label: Hex ColorScheme
+      name: hexColorScheme
+      required: true
+      type: TEXT
+timestamp: Aug 5, 2023, 11:46:51 PM
+component: f7-card
+config:
+  style:
+    min-width: 360px
+  stylesheet: >
+    
+    .accordion-nr.open {
+
+      max-height: 400px;
+      transition: max-height 0.25s ease-in; 
+    }
+
+    .accordion-nr.closed {
+
+      max-height: 0px;
+      transition: max-height 0.15s ease-out;
+    }
+slots:
+  default:
+    - component: f7-row
+      config:
+        class:
+          - justify-content-left
+          - align-items-center
+          - display-flex
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - padding-half
+              style:
+                height: 100%
+                width: 60px
+            slots:
+              default:
+                - component: oh-icon
+                  config:
+                    height: 100%
+                    icon: iconify:iconoir:air-conditioner
+                    style:
+                      opacity: 0.7
+                    width: 100%
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - flex-direction-column
+              style:
+                flex-grow: 1
+                height: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    style:
+                      overflow: hidden
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 16px
+                            font-weight: bold
+                          text: '=props.groupItemLabel ? props.groupItemLabel : "TBD"'
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-column
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          text: '=props.groupItemLocation ? props.groupItemLocation : "TBD"'
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-row
+                      - justify-content-left
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-chip
+                        config:
+                          style:
+                            background-color: "#6a6a6a"
+                            color: white
+                            justify-content: flex-end
+                          text: =@(props.groupItem+"_ambientTemp")
+                      - component: f7-chip
+                        config:
+                          style:
+                            background: none
+                            color: red
+                            justify-content: flex-end
+                          text: =@(props.groupItem+"_targetTemp")
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - justify-content-center
+                - margin-right
+              style:
+                height: 100%
+                width: auto
+            slots:
+              default:
+                - component: oh-toggle
+                  config:
+                    item: =props.powerItem
+                    style:
+                      --f7-toggle-active-color: =(items[props.modeItem].state=="COOL")?"#15B4B7":(items[props.modeItem].state=="HEAT")?"#E74239":(items[props.modeItem].state=="DRY")?"#E7D200":"gray"
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - justify-content-center
+                - margin-right
+              style:
+                height: 100%
+                width: auto
+            slots:
+              default:
+                - component: oh-link
+                  config:
+                    action: variable
+                    actionVariable: openAccordion
+                    actionVariableValue: '=(vars.openAccordion== "null") ? true : !(vars.openAccordion)'
+                  slots:
+                    default:
+                      - component: oh-icon
+                        config:
+                          icon: f7:ellipsis_vertical
+                          style:
+                            color: var(--f7-toggle-inactive-color)
+                          width: 30px
+    - component: f7-block
+      config:
+        class:
+          - no-padding
+          - accordion-nr
+          - '=vars.openAccordion ? "open" : "closed"'
+        style:
+          margin-top: 0px
+          overflow: hidden
+          width: 100%
+      slots:
+        default:
+          - component: f7-row
+            config:
+              class:
+                - no-margin
+                - no-padding-left
+                - no-padding-right
+                - display-flex
+              style:
+                height: 120px
+                width: 100%
+            slots:
+              default:
+                - component: f7-col
+                  config:
+                    class:
+                      - display-flex
+                      - justify-content-left
+                      - no-margin
+                      - no-padding
+                    style:
+                      flex-grow: 5
+                      height: 100%
+                      width: 70%
+                  slots:
+                    default:
+                      - component: f7-block
+                        config:
+                          class:
+                            - no-margin
+                            - no-padding
+                          style:
+                            height: 100%
+                            width: 100%
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: analyzer
+                                actionAnalyzerChartType: day
+                                actionAnalyzerCoordSystem: time
+                                actionAnalyzerItems: =[props.groupItem + "_ambientTemp",props.groupItem + "_targetTemp"]
+                                style:
+                                  height: 100%
+                                  width: 100%
+                              slots:
+                                default:
+                                  - component: oh-trend
+                                    config:
+                                      style:
+                                        height: 100%
+                                        width: 100%
+                                      trendGradient: =[(items[props.modeItem].state=='COOL')?('#15B4B7'):(items[props.modeItem].state=='HEAT')?('#E74239'):(items[props.modeItem].state=='DRY')?('#E7D200'):('gray'),('gray')]
+                                      trendItem: =props.groupItem + "_ambientTemp"
+                                      trendStrokeWidth: 2
+                - component: f7-col
+                  config:
+                    class:
+                      - no-margin
+                      - display-flex
+                      - justify-content-center
+                      - align-items-flex-end
+                      - padding-vertical
+                    style:
+                      flex-grow: 0
+                      height: 100%
+                      width: 30%
+                  slots:
+                    default:
+                      - component: f7-row
+                        config:
+                          class:
+                            - justify-content-center
+                            - align-items-flex-end
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: =Number(items[props.groupItem + "_targetTemp"].state.split(' ')[0]) + 0.5
+                                actionItem: =props.groupItem + "_targetTemp"
+                                iconF7: arrow_up_circle
+                                iconSize: 32
+                                style:
+                                  color: '=(items[props.modeItem].state=="COOL") ? "#15B4B7" : (items[props.modeItem].state=="HEAT") ? "#E74239" : (items[props.modeItem].state=="DRY") ? "#E7D200" : "gray"'
+                                  height: auto
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: =Number(items[props.groupItem + "_targetTemp"].state.split(' ')[0]) - 0.5
+                                actionItem: =props.groupItem + "_targetTemp"
+                                iconF7: arrow_down_circle
+                                iconSize: 32
+                                style:
+                                  color: '=(items[props.modeItem].state=="COOL") ? "#15B4B7" : (items[props.modeItem].state=="HEAT") ? "#E74239" : (items[props.modeItem].state=="DRY") ? "#E7D200" : "gray"'
+                                  height: auto
+          - component: f7-card-footer
+            config:
+              style:
+                background-color: var(--f7-card-footer-bg-color)
+            slots:
+              default:
+                - component: f7-block
+                  config:
+                    class:
+                      - no-padding
+                      - no-margin
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-row
+                        config:
+                          class:
+                            - justify-content-space-around
+                            - align-items-center
+                            - display-flex
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: command
+                                actionCommand: COOL
+                                actionItem: =props.groupItem + "_mode"
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      color: '=(items[props.groupItem + "_mode"].state=="COOL") ? "#15B4B7" : "gray"'
+                                      icon: iconify:ion:snow
+                                      width: 24px
+                            - component: oh-link
+                              config:
+                                action: command
+                                actionCommand: HEAT
+                                actionItem: =props.groupItem + "_mode"
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      color: '=(items[props.groupItem + "_mode"].state=="HEAT") ? "#E74239" : "gray"'
+                                      icon: iconify::ion:flame-sharp
+                                      width: 24px
+                            - component: oh-link
+                              config:
+                                action: command
+                                actionCommand: DRY
+                                actionItem: =props.groupItem + "_mode"
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      color: '=(items[props.groupItem + "_mode"].state=="DRY") ? "#E7D200" : "gray"'
+                                      icon: iconify:material-symbols:cool-to-dry-rounded
+                                      width: 24px
+                            - component: oh-link
+                              config:
+                                action: options
+                                actionItem: =props.groupItem + "_fanSpeed"
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: f7-chip
+                                    config:
+                                      text: =@(props.groupItem+"_fanSpeed")
+                                  - component: oh-icon
+                                    config:
+                                      color: gray
+                                      icon: iconify:material-symbols:mode-fan
+                                      width: 24px
+                            - component: oh-link
+                              config:
+                                action: options
+                                actionItem: =props.groupItem + "_vanesUpDown"
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: f7-chip
+                                    config:
+                                      text: =@(props.groupItem+"_vanesUpDown")
+                                  - component: oh-icon
+                                    config:
+                                      color: gray
+                                      icon: f7:move
+                                      width: 24px
