@@ -1,0 +1,237 @@
+uid: semanticHomeMenu_Security_Keypad
+tags: []
+props:
+  parameters:
+    - context: text
+      label: Security Group
+      name: securityGroup
+      required: true
+      type: TEXT
+    - context: text
+      description: Target Security Mode
+      name: targetMode
+      required: true
+      type: TEXT
+    - description: Replace pincode characters with this string, leave blank to show it as-is
+      label: Mask character
+      name: mask
+      required: false
+      type: TEXT
+  parameterGroups: []
+timestamp: Aug 5, 2023, 10:40:32 PM
+component: f7-block
+config:
+  style:
+    background: =(themeOptions.dark=="light") ? ("white"):("black")
+    --f7-button-text-color: var(--f7-text-color)
+    --f7-button-bg-color: var(--f7-card-bg-color)
+    --f7-theme-color-rgb: var(--f7-color-blue-rgb)
+  class:
+    - padding
+slots:
+  default:
+    - component: oh-label-card
+      config:
+        outline: true
+        class:
+          - margin-bottom
+        label: "=(props.mask && vars.pincode) ? props.mask.repeat(vars.pincode.length || 0) : vars.pincode"
+    - component: f7-row
+      config:
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "1"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "1" : "1"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "2"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "2" : "2"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "3"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "3" : "3"'
+    - component: f7-row
+      config:
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "4"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "4" : "4"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "5"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "5" : "5"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "6"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "6" : "6"'
+    - component: f7-row
+      config:
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "7"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "7" : "7"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "8"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "8" : "8"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "9"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "9" : "9"'
+    - component: f7-row
+      config:
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "*"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "*" : "*"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "0"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "0" : "0"'
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: "#"
+                    raised: true
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode + "#" : "#"'
+    - component: f7-row
+      config:
+        style:
+          --f7-theme-color: var(--f7-color-blue)
+          --f7-button-bg-color: transparent
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: Clear
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: ""
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: Enter
+                    fill: true
+                    large: true
+                    action: command
+                    disabled: =!vars.pincode
+                    actionItem: =props.securityGroup+"_mode"
+                    actionCommand: '=(items[props.securityGroup+"_PIN"].state != vars.pincode) ? items[props.securityGroup+"_mode"].state : props.targetMode'
+                    clearVariable: pincode
+                    popup-close: true
+          - component: f7-col
+            slots:
+              default:
+                - component: oh-button
+                  config:
+                    text: Back
+                    large: true
+                    action: variable
+                    actionVariable: pincode
+                    actionVariableValue: '=(vars.pincode) ? vars.pincode.substring(0, vars.pincode.length - 1) : ""'
