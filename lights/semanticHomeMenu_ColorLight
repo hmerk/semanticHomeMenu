@@ -1,0 +1,304 @@
+uid: semanticHomeMenu_ColorLight
+tags: []
+props:
+  parameters:
+    - description: Title of the card (generated from repeater with uiSemantics)
+      label: Title
+      name: title
+      required: false
+      type: TEXT
+    - context: item
+      description: Calculated by oh-repeater in Floors&Rooms
+      label: Light Equipment Group
+      name: groupItem
+      required: false
+      type: TEXT
+    - description: Calculated by oh-repeater in Floors&Rooms
+      label: Light Equipment Group Label
+      name: groupItemLabel
+      required: false
+      type: TEXT
+    - description: Calculated by oh-repeater in Floors&Rooms
+      label: Light Equipment Group Location
+      name: groupItemLocation
+      required: false
+      type: TEXT
+    - context: Text
+      default: orange
+      label: ColorScheme
+      name: colorScheme
+      required: true
+      type: TEXT
+    - context: Text
+      default: RGB(255,153,0)
+      label: RGB ColorScheme
+      name: rgbColorScheme
+      required: true
+      type: TEXT
+    - context: Text
+      default: FF9900
+      label: Hex ColorScheme
+      name: hexColorScheme
+      required: true
+      type: TEXT
+timestamp: Jul 31, 2023, 4:53:07 PM
+component: f7-card
+config:
+  style:
+    min-width: 360px
+  stylesheet: >
+    
+    .accordion-nr.open {
+
+      max-height: 400px;
+      transition: max-height 0.25s ease-in; 
+    }
+
+    .accordion-nr.closed {
+
+      max-height: 0px;
+      transition: max-height 0.15s ease-out;
+    }
+slots:
+  default:
+    - component: f7-row
+      config:
+        class:
+          - justify-content-left
+          - align-items-center
+          - display-flex
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - padding-half
+              style:
+                height: 100%
+                width: 60px
+            slots:
+              default:
+                - component: oh-icon
+                  config:
+                    height: 100%
+                    icon: iconify:clarity:lightbulb-line
+                    style:
+                      opacity: 0.7
+                    width: 100%
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - flex-direction-column
+              style:
+                flex-grow: 1
+                height: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    style:
+                      overflow: hidden
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 16px
+                            font-weight: bold
+                          text: '=props.title ? props.title : props.groupItemLabel ? props.groupItemLabel : "TBD"'
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-column
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          text: '=props.title ? "" : props.groupItemLocation ? props.groupItemLocation : "TBD"'
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - justify-content-center
+                - margin-right
+              style:
+                height: 100%
+                width: auto
+            slots:
+              default:
+                - component: oh-toggle
+                  config:
+                    item: =props.groupItem + "_switch"
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - justify-content-center
+                - margin-right
+              style:
+                height: 100%
+                width: auto
+            slots:
+              default:
+                - component: oh-link
+                  config:
+                    action: variable
+                    actionVariable: openAccordion
+                    actionVariableValue: '=(vars.openAccordion== "null") ? true : !(vars.openAccordion)'
+                  slots:
+                    default:
+                      - component: oh-icon
+                        config:
+                          icon: f7:ellipsis_vertical
+                          style:
+                            color: var(--f7-toggle-inactive-color)
+                          width: 30px
+    - component: f7-block
+      config:
+        class:
+          - no-padding
+          - accordion-nr
+          - '=vars.openAccordion ? "open" : "closed"'
+        style:
+          margin-top: 0px
+          overflow: hidden
+          width: 100%
+      slots:
+        default:
+          - component: f7-row
+            config:
+              class:
+                - margin
+                - justify-content-left
+                - align-items-center
+                - display-flex
+              style:
+                height: auto
+            slots:
+              default:
+                - component: Label
+                  config:
+                    style:
+                      color: black
+                      display: "=(items[props.groupItem + '_colorTemperature'].state != '-') ? '' : 'none !important'"
+                      font-size: 13px
+                      font-weight: var(--f7-list-item-footer-font-weight)
+                      line-height: 0.5
+                      margin-left: 1rem
+                    text: Ambiance
+                - component: oh-slider
+                  config:
+                    item: =props.groupItem + '_colorTemperature'
+                    max: 100
+                    min: 0
+                    style:
+                      --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                      margin-left: 10px
+                      margin-right: 10px
+                      margin-top: 15px
+                      width: calc(100% - 1rem)
+                    visible: "=(items[props.groupItem + '_colorTemperature'].state != '-') ? 'true' : 'false'"
+          - component: f7-row
+            config:
+              class:
+                - margin
+                - justify-content-left
+                - align-items-center
+                - display-flex
+              style:
+                height: auto
+            slots:
+              default:
+                - component: Label
+                  config:
+                    style:
+                      color: black
+                      display: "=(items[props.groupItem + '_brightness'].state != '-') ? '' : 'none !important'"
+                      font-size: 13px
+                      font-weight: var(--f7-list-item-footer-font-weight)
+                      line-height: 0.5
+                      margin-left: 1rem
+                    text: Brightness
+                - component: oh-slider
+                  config:
+                    item: =props.groupItem + '_brightness'
+                    max: 100
+                    min: 0
+                    style:
+                      --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                      margin-left: 10px
+                      margin-right: 10px
+                      margin-top: 15px
+                      width: calc(100% - 1rem)
+                    visible: "=(items[props.groupItem + '_brightness'].state != '-') ? 'true' : 'false'"
+          - component: f7-row
+            config:
+              class:
+                - margin
+                - justify-content-left
+                - align-items-center
+                - display-flex
+              style:
+                height: auto
+            slots:
+              default:
+                - component: Label
+                  config:
+                    style:
+                      color: black
+                      display: "=(items[props.groupItem + '_color'].state != '-') ? '' : 'none !important'"
+                      font-size: 13px
+                      font-weight: var(--f7-list-item-footer-font-weight)
+                      line-height: 0.5
+                      margin-left: 1rem
+                    text: RGB colors
+                - component: oh-colorpicker
+                  config:
+                    item: =props.groupItem + '_color'
+                    modules:
+                      - rgb-sliders
+                    style:
+                      width: calc(100% - 1rem)
+                    visible: "=(items[props.groupItem + '_color'].state != '-') ? 'true' : 'false'"
+          - component: f7-card-footer
+            config:
+              style:
+                background-color: var(--f7-card-footer-bg-color)
+            slots:
+              default:
+                - component: f7-block
+                  config:
+                    class:
+                      - no-padding
+                      - no-margin
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-row
+                        config:
+                          class:
+                            - justify-content-left
+                            - align-items-center
+                            - display-flex
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                style:
+                                  align-items: center
+                                  padding-left: 10px
+                              slots:
+                                default:
+                                  - component: f7-chip
+                                    config:
+                                      style:
+                                        align-items: center
+                                        font-weight: 500
+                                        justify-content: flex-end
+                                      text: Badge
