@@ -1,7 +1,7 @@
 # semanticHomeMenu
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/semanticHomeWidget.jpg)
 # About
-The semanticHome project will give you an unique and easy to setup UI on mobile devices to control your openHAB installation. It is the openHAB 4 successor of the "main_widget" project.
+The semanticHomeMenu project will give you an unique and easy to setup UI on mobile devices to control your openHAB installation. It is the openHAB 4 successor of the "main_widget" project.
 The project is divided into a top level widget (semanticHomeMenu), and some equipment specific second level widgets (_Light, _ColorLight, _DimmableLight, _Rollershutter, RadiatorControl, _Security, _Energy).
 It is also possible to use the second level widgets standalone or to extend the project with further widgets your own, some innspiration will be given later.
 
