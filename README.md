@@ -1,7 +1,5 @@
 # semanticHomeMenu
-
-[Screenshot]
-
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/semanticHomeWidget.jpg)
 # About
 The semanticHome project will give you an unique and easy to setup UI on mobile devices to control your openHAB installation. It is the openHAB 4 successor of the "main_widget" project.
 The project is divided into a top level widget (semanticHomeMenu), and some equipment specific second level widgets (_Light, _ColorLight, _DimmableLight, _Rollershutter, RadiatorControl, _Security, _Energy).
@@ -12,7 +10,9 @@ A openHAB 4 specific version became necessary because we identified some strong 
 
 # Structure
 The top level widget will show you three diferent part (blocks):
-_TopNavigationBar_
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/TopNavigationBar.jpg)
+
 The TopNavigationBar will give you three entries when starting:
 - Home
   - The Home menu will show you a specific ButtonNavigationBar including Security, Scenes, Appliances and Energy
@@ -21,12 +21,35 @@ The TopNavigationBar will give you three entries when starting:
 - Rooms
   - The Rooms menu is the same like the Floors Menu, but for the rooms. Selecting the Rooms menu without selecting a particular floor will give you an unfiltered list of all rooms available in your model.
    
-_BodyBlock for specific widgets_
-- This block is used to show you the specific widgets which will be explained in their own readme's.
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/WeatherWidgets.jpg)
+
+The body block is used to show you the specific widgets which will be explained in their own readme's.
+The weather widget shown in the screenshot above can be found in the community:
+[forecast widget]
+[actual weather widget]
+To use these widgets, the following prerequisits apply [unless you are comfortable to tweak the code yourself] :
+[weather prerequisits]
+
+
   
-_BottomNavigationBar_
-This block will show you two different navigaion menus, depending on yhour choice of pressing Home or Rooms/Floors
- 
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavigationBar.jpg)
+
+The BottomNavigationBar will show you two different navigaion menus, the above shown will be rendered when selection the Home Menu, whereas the following will be shown when you select Floors or Rooms.
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavigationBar2.jpg)
+
+ The little red badge next to the security icon shows the number of alarms (smoke detected, open doors and windows). This information is retrieved from the groups "gSmokeAlarm", "gWindowsOpen" and "gDoorsOpen". These are non semantic groups which can be created from the following example:
+
+```csv
+Group:Number:COUNT(ON)        gSmokeAlarm                 "Smoke Alarm"                             <smoke>
+Group:Number:COUNT(OPEN)      gWindowsOpen                "Number of open windows"                  <window>                      
+Group:Number:COUNT(OPEN)      gDoorsOpen                  "Number of open doors"                    <door>                     
+```
+There is also a little red badge shown next to Energy, indicating the number of batteries which need your attention (empty).
+```csv
+Group:Number:COUNT(ON)        gBatteryLowTotal            "Number of empty batteries"                <lowbattery>
+```
+These badges are shown only when an alarm exists!
 
 # Installation
 Prerequisite for using this project is a well maintained semantic model and a strict naming scheme for several items. Best thing is not to create items individually but always use the "create equipment from Thing" option in main UI. All second level (equipment) widgets will include Group and Item examples for textual import. 
