@@ -6,7 +6,7 @@ The project is divided into a top level widget (semanticHomeMenu), and some equi
 It is also possible to use the second level widgets standalone or to extend the project with further widgets your own, some innspiration will be given later.
 
 # History
-A openHAB 4 specific version became necessary because we identified some strong performance issues in "main_widget" due to the heavy usage of the oh-repeater componente, which are used to gather all semantic information needed to reduce configuration commplexitiy.
+An openHAB 4 specific version became necessary because we identified some strong performance issues in "main_widget" due to the heavy usage of the oh-repeater component, which is used to gather all semantic information needed to reduce configuration commplexity.
 
 # Structure
 The top level widget will show you three diferent part (blocks):
@@ -15,7 +15,7 @@ The top level widget will show you three diferent part (blocks):
 
 The TopNavigationBar will give you three entries when starting:
 - Home
-  - The Home menu will show you a specific ButtonNavigationBar including Security, Scenes, Appliances and Energy
+  - The Home menu will show you a specific BottomNavigationBar including Security, Scenes, Appliances and Energy
 - Floors
   - The Floors menu will read all your floors from the semantic model and present them in a second row as a swipeable list.
 - Rooms
