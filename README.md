@@ -25,12 +25,8 @@ The TopNavigationBar will give you three entries when starting:
 
 The body block is used to show you the specific widgets which will be explained in their own readme's.
 The weather widget shown in the screenshot above can be found in the community:
-[forecast widget]
-[actual weather widget]
-To use these widgets, the following prerequisits apply [unless you are comfortable to tweak the code yourself] :
-[weather prerequisits]
-
-
+Actual weather : https://community.openhab.org/t/oh3-main-ui-examples/117928/22
+Weather forecast : https://community.openhab.org/t/oh3-main-ui-examples/117928/30
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavigationBar.jpg)
 
