@@ -44,6 +44,8 @@ The Menu is split into multiple specialized widgets that are shown if the model 
 * [RadiatorControl widget]
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl_dark.jpg)
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControlExpanded_dark.jpg)
 * [HVAC widget]
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC_dark.jpg)
