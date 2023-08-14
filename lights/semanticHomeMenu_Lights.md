@@ -1,4 +1,8 @@
-
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLight_dark.jpg)
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLight_dark.jpg)
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight_dark.jpg)
 
 The Lights widget card used by main_widget will show all kind of lights equipment in a selected room and show controlls based on equipment group members.
 
