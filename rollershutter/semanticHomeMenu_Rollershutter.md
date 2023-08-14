@@ -1,3 +1,6 @@
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter_dark.jpg)
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RollershutterExpanded_dark.jpg)
 
 The rollershutter card is one of the sub widgets to let you control your rollershutters with a unique look and feel.
 Apart from just controlling your rollershutters with sending up and down commands, you can also send predefined values like 50% to your device.
