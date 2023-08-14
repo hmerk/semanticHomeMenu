@@ -37,8 +37,9 @@ The Menu is split into multiple specialized widgets that are shown if the model 
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight_dark.jpg)
 * [Rollershutter widget]
-  
+
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter_dark.jpg)
+  * including the [Time Picker](https://community.openhab.org/t/time-picker/118865)
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RollershutterExpanded_dark.jpg)
 * [RadiatorControl widget]
