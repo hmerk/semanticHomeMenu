@@ -9,7 +9,7 @@ This widget can be installed via the marketplace. For basic operation, no config
 To use the time based triggers, there are some additional steps needed.
 - Install the timepicker widget from the marketplace.
   - https://community.openhab.org/t/time-picker/118865
-- change lines 49,69,123,143,187,218 from
+- change lines 49,69,123,143,187 and 218 from
 ```csv
  YYYY-MM-DDTHH:mm:ss.ZZ
  ```
@@ -19,7 +19,7 @@ to
 ```
 
 - You will need 5 additional items in your rollershutter equipment group, here we take the rollershutters in the childroom as an example
-  - A Switch item to enable/disable the automatic/time control [mandatory]
+  - A Switch item to enable/disable the automatic/time control [optional]
   - 4 DateTime items for holding the different Times, openWeekday, closeWeekday, openWeekend, closeWeekend [optional]
 
 Example for textual item import
