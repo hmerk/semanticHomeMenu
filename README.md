@@ -28,14 +28,14 @@ The Menu is split into multiple specialized widgets that are shown if the model 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SecurityPinPad.jpg)
 * [Scenes widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scene.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scenes.jpg)
 * [Lights widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLight.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLightOff.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLight.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLightOff.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLightOff.jpg)
 * [Rollershutter widget]
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter.jpg)
@@ -43,7 +43,7 @@ The Menu is split into multiple specialized widgets that are shown if the model 
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC.jpg)
 * The weather widget shown in the screenshots can be found in the community
   * [Actual weather](https://community.openhab.org/t/oh3-main-ui-examples/117928/22)
   * [Weather forecast](https://community.openhab.org/t/oh3-main-ui-examples/117928/30)
