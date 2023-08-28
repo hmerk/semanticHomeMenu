@@ -1,11 +1,16 @@
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLightOff.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLightOff.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLightOff.jpg)
 
-The Lights widget card used by main_widget will show all kind of lights equipment in a selected room and show controlls based on equipment group members.
+The Lights widget card used by semanticHomeMenu will show all kind of lights equipment in a selected room and show controls based on equipment group members.
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLightExpanded.jpg)
+  
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLightExpanded.jpg)
 
+Group members have to follow the naming shown in the example Items definition.
 ## Usage
 
 All lights need to have their own Group (**Group->Equipment->Lightbulb**), even they just have a Switch Item.
