@@ -3,17 +3,17 @@ tags: []
 props:
   parameters:
     - context: item
-      description: Calculated by oh-repeater in Floors&Rooms
+      description: Calculated by oh-repeater
       label: Blinds Group
       name: groupItem
       required: false
       type: TEXT
-    - description: Calculated by oh-repeater in Floors&Rooms
+    - description: Calculated by oh-repeater
       label: Blinds Group Label
       name: groupItemLabel
       required: false
       type: TEXT
-    - description: Calculated by oh-repeater in Floors&Rooms
+    - description: Calculated by oh-repeater
       label: Blinds Group Location
       name: groupItemLocation
       required: false
@@ -24,22 +24,13 @@ props:
       name: colorScheme
       required: true
       type: TEXT
-    - context: Text
-      default: RGB(255,153,0)
-      label: RGB ColorScheme
-      name: rgbColorScheme
-      required: true
-      type: TEXT
-    - context: Text
-      default: FF9900
-      label: Hex ColorScheme
-      name: hexColorScheme
-      required: true
-      type: TEXT
-timestamp: Aug 4, 2023, 11:00:01 PM
+timestamp: Aug 27, 2023, 11:42:51 PM
 component: f7-card
 config:
   style:
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
     min-width: 360px
   stylesheet: >
     .accordion-nr.open {
@@ -260,7 +251,7 @@ slots:
                               - 50
                             color:
                               colorStops:
-                                - color: "#188df0"
+                                - color: yellow
                                   offset: 0
                                 - color: white
                                   offset: 1
@@ -431,7 +422,7 @@ slots:
                                                   class:
                                                     - margin-half
                                                   style:
-                                                    background-color: '=(Number(items[props.groupItem + "_control"].state.split(" ")[0])== loop.preset) ? "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                                    background-color: '=(Number(items[props.groupItem + "_control"].state.split(" ")[0])== loop.preset) ? props.colorScheme : "var(--f7-toggle-inactive-color)"'
                                                     border-radius: 100%
                                                     color: white
                                                     font-weight: bold
@@ -493,7 +484,7 @@ slots:
                                                   icon: iconify:carbon:event-schedule
     - component: f7-popup
       config:
-        class: =props.groupItem + " mainWidget"
+        class: =props.groupItem
         closeByBackdropClick: true
         closeByOutsideClick: true
         closeOnEscape: true
@@ -508,6 +499,7 @@ slots:
                 - align-items-center
                 - display-flex
               style:
+                padding-top: 50px
                 width: 100%
             slots:
               default:
@@ -520,6 +512,7 @@ slots:
                     default:
                       - component: oh-toggle
                         config:
+                          color: =props.colorScheme
                           item: =props.groupItem + '_scheduleControl'
                 - component: f7-col
                   slots:
