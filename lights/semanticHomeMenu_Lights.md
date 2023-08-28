@@ -6,9 +6,9 @@
 
 The Lights widget card used by semanticHomeMenu will show all kind of lights equipment in a selected room and show controls based on equipment group members.
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLightExpanded.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLightControls.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLightExpanded.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLightControls.jpg)
 
 Group members have to follow the naming shown in the example Items definition.
 ## Usage
