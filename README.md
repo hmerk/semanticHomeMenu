@@ -16,7 +16,18 @@ This main UI widget is based on a proper configuration of the [openHAB semantic 
 
 To help getting more information about an item we make use of an extention of the semantic model via the [uiSemantics](https://community.openhab.org/t/semantic-ui-using-enriched-semantic-to-ease-ui-creation/116882).
 
-The Menu is split into multiple specialized widgets that are shown if the model contains the needed data.
+The Menu is split into a Top Navigation Bar,
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots//TopNavbar_unselected.jpg)
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/TopNavbar_selected.jpg)
+
+the Body showing multiple specialized widgets (which are shown if the model contains the needed data) 
+and the the Bottom Navigation Bar.
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_unselected.jpg)
+
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_ScenesSlected.jpg)
 
 * [HomeMenu]
 * [semanticHomeMenu]
