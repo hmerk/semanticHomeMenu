@@ -21,14 +21,14 @@ props:
       name: bnavColor
       required: false
       type: TEXT
-timestamp: Aug 5, 2023, 11:58:45 PM
+timestamp: Aug 26, 2023, 11:03:18 PM
 component: f7-block
 config:
   style:
-    --my-rgb-colorScheme: '=props.color =="red" ? "RGB(255,0,0)" : props.color =="cyan" ? "RGB(3,255,255)" : "RGB(255,153,0)"'
-    --my-hex-colorScheme: '=props.color =="red" ? "#FF0000" : props.color =="cyan" ? "#03FFFF" :"#FF9900"'
-    --my-text-colorScheme: =props.color
     --my-bottom-navbar-background: '=!props.bnavColor ? "RGB(96, 96, 96)" : props.bnavColor'
+    --my-hex-colorScheme: '=props.color =="red" ? "#FF0000" : props.color =="cyan" ? "#03FFFF" :"#FF9900"'
+    --my-rgb-colorScheme: '=props.color =="red" ? "RGB(255,0,0)" : props.color =="cyan" ? "RGB(3,255,255)" : "RGB(255,153,0)"'
+    --my-text-colorScheme: =props.color
     background: =(themeOptions.dark=="light") ? ("white"):("black")
     height: 100vh
     margin: 0
@@ -626,10 +626,10 @@ slots:
                 - no-padding
             slots:
               default:
-                - component: widget:Cell_Weather
+                - component: widget:Cell_Weather_1
                   config:
                     visible: '=(!vars.objVar || ((vars.objVar.selectSection=="SECTION0") && !vars.objVar.selectThing)) ? true : false'
-                - component: widget:Cell_Weather_Actual
+                - component: widget:Cell_Weather_Actual_1
                   config:
                     item_hum: OneCallAPIweatherandforecast_ForecastDay3_Humidity
                     item_rain: OneCallAPIweatherandforecast_Current_Rain
@@ -664,9 +664,15 @@ slots:
                           sceneName: =loop.scene.name
                           sceneUID: =loop.scene.UID
                           visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Scenes") ? true : false : false'
+                - component: widget:semanticHomeMenu_Appliances
+                  config:
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Appliances") ? true : false : false'
                 - component: widget:semanticHomeMenu_Energy
                   config:
                     visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Energy") ? true : false : false'
+                - component: widget:semanticHomeMenu_System
+                  config:
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0System") ? true : false : false'
                 - component: f7-row
                   config:
                     class:
@@ -717,83 +723,26 @@ slots:
                                             sourceType: itemsWithTags
                                           slots:
                                             default:
-                                              - component: oh-repeater
+                                              - component: f7-col
                                                 config:
-                                                  cacheSource: true
-                                                  filter: '(loop.lightPowerItem.type=="Switch") ? true : false'
-                                                  for: lightPowerItem
-                                                  fragment: true
-                                                  groupItem: =loop.equipmentItem.name
-                                                  sourceType: itemsInGroup
+                                                  class:
+                                                    - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
                                                 slots:
                                                   default:
-                                                    - component: f7-col
+                                                    - component: widget:semanticHomeMenu_Lights
                                                       config:
-                                                        class:
-                                                          - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
-                                                        large: 50
-                                                        medium: 50
-                                                        small: 90
-                                                        style:
-                                                          overflow: hidden
-                                                        width: 100
-                                                        xlarge: 33
-                                                        xsmall: 100
-                                                      slots:
-                                                        default:
-                                                          - component: widget:semanticHomeMenu_Light
-                                                            config:
-                                                              colorScheme: var(--my-text-colorScheme)
-                                                              rgbColorScheme: var(--my-rgb-colorScheme)
-                                                              hexColorScheme: var(--my-hex-colorScheme)
-                                                              groupItem: =loop.equipmentItem.name
-                                                              groupItemLabel: =loop.equipmentItem.label
-                                                              groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
-                                                              powerItem: = loop.lightPowerItem.name
-                                        - component: oh-repeater
-                                          config:
-                                            cacheSource: true
-                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name)
-                                            for: equipmentItem
-                                            fragment: true
-                                            itemTags: Lightbulb
-                                            sourceType: itemsWithTags
-                                          slots:
-                                            default:
-                                              - component: oh-repeater
-                                                config:
-                                                  cacheSource: true
-                                                  filter: '(loop.lightDimmerItem.type=="Dimmer") ? true : false'
-                                                  for: lightDimmerItem
-                                                  fragment: true
-                                                  groupItem: =loop.equipmentItem.name
-                                                  sourceType: itemsInGroup
-                                                slots:
-                                                  default:
-                                                    - component: f7-col
-                                                      config:
-                                                        class:
-                                                          - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
-                                                        large: 50
-                                                        medium: 50
-                                                        small: 90
-                                                        style:
-                                                          overflow: hidden
-                                                        width: 100
-                                                        xlarge: 33
-                                                        xsmall: 100
-                                                      slots:
-                                                        default:
-                                                          - component: widget:semanticHomeMenu_DimmableLight
-                                                            config:
-                                                              colorScheme: var(--my-text-colorScheme)
-                                                              rgbColorScheme: var(--my-rgb-colorScheme)
-                                                              hexColorScheme: var(--my-hex-colorScheme)
-                                                              groupItem: =loop.equipmentItem.name
-                                                              groupItemLabel: =loop.equipmentItem.label
-                                                              groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
-                                                              dimmerItem: = loop.lightDimmerItem.name
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -805,52 +754,26 @@ slots:
                                             sourceType: itemsWithTags
                                           slots:
                                             default:
-                                              - component: oh-repeater
+                                              - component: f7-col
                                                 config:
-                                                  cacheSource: true
-                                                  fetchMetadata: semantics,metadata
-                                                  filter: (loop.shutterItem.type == "Rollershutter") && (loop.shutterItem.tags).includes("Control")
-                                                  for: shutterItem
-                                                  fragment: true
-                                                  groupItem: =loop.equipmentItem.name
-                                                  sourceType: itemsInGroup
+                                                  class:
+                                                    - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Rollers")) ? "visible" : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
                                                 slots:
                                                   default:
-                                                    - component: oh-repeater
+                                                    - component: widget:semanticHomeMenu_Rollershutter
                                                       config:
-                                                        cacheSource: true
-                                                        fetchMetadata: semantics
-                                                        filter: (loop.modeItem.type == "Switch") && (loop.modeItem.tags).includes("Control")
-                                                        for: modeItem
-                                                        fragment: true
+                                                        colorScheme: var(--my-text-colorScheme)
                                                         groupItem: =loop.equipmentItem.name
-                                                        sourceType: itemsInGroup
-                                                      slots:
-                                                        default:
-                                                          - component: f7-col
-                                                            config:
-                                                              class:
-                                                                - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Rollers")) ? "visible" : "invisible"'
-                                                              large: 50
-                                                              medium: 50
-                                                              small: 90
-                                                              style:
-                                                                overflow: hidden
-                                                              width: 100
-                                                              xlarge: 33
-                                                              xsmall: 100
-                                                            slots:
-                                                              default:
-                                                                - component: widget:semanticHomeMenu_Rollershutter
-                                                                  config:
-                                                                    colorScheme: var(--my-text-colorScheme)
-                                                                    rgbColorScheme: var(--my-rgb-colorScheme)
-                                                                    hexColorScheme: var(--my-hex-colorScheme)
-                                                                    RollerItem: =loop.shutterItem.name
-                                                                    RollerMode: = loop.modeItem.name
-                                                                    groupItem: =loop.equipmentItem.name
-                                                                    groupItemLabel: =loop.equipmentItem.label
-                                                                    groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -879,11 +802,10 @@ slots:
                                                     - component: widget:semanticHomeMenu_RadiatorControl
                                                       config:
                                                         colorScheme: var(--my-text-colorScheme)
-                                                        rgbColorScheme: var(--my-rgb-colorScheme)
-                                                        hexColorScheme: var(--my-hex-colorScheme)
                                                         groupItem: =loop.equipmentItem.name
-                                                        groupItemLabel: =loop.equipmentItem.label
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
                                                         groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        hexColorScheme: var(--my-hex-colorScheme)
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -895,49 +817,25 @@ slots:
                                             sourceType: itemsWithTags
                                           slots:
                                             default:
-                                              - component: oh-repeater
+                                              - component: f7-col
                                                 config:
-                                                  cacheSource: true
-                                                  fetchMetadata: semantics
-                                                  filter: (loop.hvacPowerItem.type == "Switch") && (loop.hvacPowerItem.tags).includes("Control") && (loop.hvacPowerItem.tags).includes("Power")
-                                                  for: hvacPowerItem
-                                                  fragment: true
-                                                  groupItem: =loop.equipmentItem.name
-                                                  sourceType: itemsInGroup
+                                                  class:
+                                                    - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate")) ? "visible" : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
                                                 slots:
                                                   default:
-                                                    - component: oh-repeater
+                                                    - component: widget:semanticHomeMenu_HVAC
                                                       config:
-                                                        cacheSource: true
-                                                        fetchMetadata: semantics
-                                                        filter: (loop.hvacModeItem.type == "String") && (loop.hvacModeItem.tags).includes("Control") && (loop.hvacModeItem.tags).includes("Temperature")
-                                                        for: hvacModeItem
-                                                        fragment: true
                                                         groupItem: =loop.equipmentItem.name
-                                                        sourceType: itemsInGroup
-                                                      slots:
-                                                        default:
-                                                          - component: f7-col
-                                                            config:
-                                                              class:
-                                                                - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate")) ? "visible" : "invisible"'
-                                                              large: 50
-                                                              medium: 50
-                                                              small: 90
-                                                              style:
-                                                                overflow: hidden
-                                                              width: 100
-                                                              xlarge: 33
-                                                              xsmall: 100
-                                                            slots:
-                                                              default:
-                                                                - component: widget:semanticHomeMenu_HVAC
-                                                                  config:
-                                                                    groupItem: =loop.equipmentItem.name
-                                                                    groupItemLabel: =loop.equipmentItem.label
-                                                                    groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
-                                                                    modeItem: =loop.hvacModeItem.name
-                                                                    powerItem: =loop.hvacPowerItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
           - component: f7-block
             config:
               class:
@@ -990,7 +888,6 @@ slots:
                                       icon: iconify:carbon:security
                                   - component: f7-badge
                                     config:
-                                      visible: =((Number(items.gDoorsOpen.state)+Number(items.gWindowsOpen.state)) > 0
                                       bgColor: red
                                       style:
                                         --f7-badge-size: 16px
@@ -998,11 +895,12 @@ slots:
                                         margin-left: 48px
                                         margin-top: -38px
                                         position: absolute
+                                      visible: =(Number(items.gDoorsOpen.state) +Number(items.gWindowsOpen.state) + Number(items.gSmokeAlarm.state) + Number(items.gMotionDetected.state)) > 0
                                     slots:
                                       default:
                                         - component: Label
                                           config:
-                                            text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state) + Number(items.gSmokeAlarm.state))
+                                            text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state) + Number(items.gSmokeAlarm.state) + Number(items.gMotionDetected.state))
                                   - component: Label
                                     config:
                                       text: Security
@@ -1101,7 +999,6 @@ slots:
                                       icon: iconify:simple-line-icons:energy
                                   - component: f7-badge
                                     config:
-                                      visible: =(Number(items.gBatteryLowTotal.state)) > 0
                                       bgColor: red
                                       style:
                                         --f7-badge-size: 16px
@@ -1109,6 +1006,7 @@ slots:
                                         margin-left: 48px
                                         margin-top: -38px
                                         position: absolute
+                                      visible: =(Number(items.gBatteryLowTotal.state)) > 0
                                     slots:
                                       default:
                                         - component: Label
@@ -1117,6 +1015,38 @@ slots:
                                   - component: Label
                                     config:
                                       text: Energy
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "System" ? undefined : "System"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "System" ?  "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:simple-line-icons:info
+                                  - component: Label
+                                    config:
+                                      text: System
           - component: f7-block
             config:
               class:
