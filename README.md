@@ -27,10 +27,10 @@ and the the Bottom Navigation Bar.
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_unselected.jpg)
 
+Bottom Navigation Bar with Scenes selected
+
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_ScenesSelected.jpg)
 
-* [HomeMenu]
-* [semanticHomeMenu]
 * [Security widget]
   * including the [Keypad widget]
   
