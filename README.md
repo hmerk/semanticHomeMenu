@@ -52,7 +52,6 @@ The red indicator badges are shown if there is any alarm, whether security or lo
 * [Rollershutter widget]
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter.jpg)
-  * including the [Time Picker](https://community.openhab.org/t/time-picker/118865)
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl.jpg)
   
@@ -63,4 +62,15 @@ The red indicator badges are shown if there is any alarm, whether security or lo
   
 ## Community
 Please check [openHAB community]for discussions and proposals.
+
+## Credits
+Thanks to 
+@Dimitris for creating the design specs
+@Nic02 for creating the widgets
+@JustinG for his excellent support when we strugled with design and functionality
+@NicoR for his style and code optimizations
+and anyone else I have forgotten
+
+## Resources
+
 
