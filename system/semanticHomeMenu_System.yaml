@@ -1,0 +1,52 @@
+uid: semanticHomeMenu_System
+tags: []
+props: {}
+timestamp: Aug 24, 2023, 10:47:45 PM
+component: f7-card
+config:
+  style:
+    --f7-card-header-border-color: transparent
+    background: =themeOptions.dark=="light" ? "white"
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
+slots:
+  default:
+    - component: f7-card-content
+      config:
+        style:
+          height: auto
+      slots:
+        default:
+          - component: oh-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: widget:frs_System_Info_list_item
+                  config:
+                    CPULoad15Item: Systeminfo_cpu_load15
+                    CPULoad1Item: Systeminfo_cpu_load1
+                    CPULoad5Item: Systeminfo_cpu_load5
+                    HidePowerOffCommand: true
+                    HideRebootCommand: true
+                    MemoryAvailableItem: Systeminfo_memory_available
+                    MemoryAvailablePercentItem: Systeminfo_memory_availablePercent
+                    MemoryTotalItem: Systeminfo_memory_total
+                    MemoryUsedItem: Systeminfo_memory_used
+                    MemoryUsedPercentItem: Systeminfo_memory_usedPercent
+                    NetworkDataReceivedItem: Systeminfo_network_dataReceived
+                    NetworkDataSentItem: Systeminfo_network_dataSent
+                    StorageAvailableItem: Systeminfo_storage_available
+                    StorageAvailablePercentItem: Systeminfo_storage_availablePercent
+                    StorageTotalItem: Systeminfo_storage_total
+                    StorageUsedItem: Systeminfo_storage_used
+                    StorageUsedPercentItem: Systeminfo_storage_usedPercent
+                    SwapAvailableItem: Systeminfo_swap_available
+                    SwapAvailablePercentItem: Systeminfo_swap_availablePercent
+                    SwapTotalItem: Systeminfo_swap_total
+                    SwapUsedItem: Systeminfo_swap_used
+                    SwapUsedPercentItem: Systeminfo_swap_usedPercent
+                    SystemOHTitle: openHAB 4 @ NiPoGi
+                    SystemUptimeItem: Systeminfo_cpu_uptime
