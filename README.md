@@ -69,6 +69,7 @@ Thanks to
 - @Nic02 for creating the widgets
 - @JustinG for his excellent support when we strugled with design and functionality
 - @NicoR for his style and code optimizations
+
 and anyone else I have forgotten
 
 ## Resources
