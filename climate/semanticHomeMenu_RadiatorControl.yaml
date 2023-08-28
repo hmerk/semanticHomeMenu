@@ -3,17 +3,17 @@ tags: []
 props:
   parameters:
     - context: item
-      description: Calculated by oh-repeater in Floors&Rooms
+      description: Calculated by oh-repeater
       label: Radiator Equipment Group
       name: groupItem
       required: false
       type: TEXT
-    - description: Calculated by oh-repeater in Floors&Rooms
+    - description: Calculated by oh-repeater
       label: Radiator Equipment Group Label
       name: groupItemLabel
       required: false
       type: TEXT
-    - description: Calculated by oh-repeater in Floors&Rooms
+    - description: Calculated by oh-repeater
       label: Radiator Equipment Group Location
       name: groupItemLocation
       required: false
@@ -25,21 +25,17 @@ props:
       required: true
       type: TEXT
     - context: Text
-      default: RGB(255,153,0)
-      label: RGB ColorScheme
-      name: rgbColorScheme
-      required: true
-      type: TEXT
-    - context: Text
-      default: FF9900
       label: Hex ColorScheme
       name: hexColorScheme
       required: true
       type: TEXT
-timestamp: Aug 4, 2023, 11:02:10 PM
+timestamp: Aug 24, 2023, 10:42:25 PM
 component: f7-card
 config:
   style:
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
     min-width: 360px
   stylesheet: >
     
