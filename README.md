@@ -6,7 +6,7 @@ The idea is to have a UI for [openHAB4](https://www.openhab.org/) that dynamical
 
 It is also possible to use the specialized widgets standalone or to extend the project with further widgets your own, some inspiration will be given later.
 
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/semanticHomeMenu2_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Startscreen.jpg)
 
 ## History
 An openHAB 4 specific version became necessary because we identified some strong performance issues in "main_widget" due to the heavy usage of the oh-repeater component, which is used to gather all semantic information needed to reduce configuration commplexity.
@@ -23,31 +23,25 @@ The Menu is split into multiple specialized widgets that are shown if the model 
 * [Security widget]
   * including the [Keypad widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Security_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Security.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SecurityKeypad_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SecurityPinPad.jpg)
 * [Scenes widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scene_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scene.jpg)
 * [Lights widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/SwitchableLight.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/DimmableLight.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/ColorLight.jpg)
 * [Rollershutter widget]
 
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter.jpg)
   * including the [Time Picker](https://community.openhab.org/t/time-picker/118865)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RollershutterExpanded_dark.jpg)
-* [RadiatorControl widget]
-  
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl_dark.jpg)
-  
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControlExpanded_dark.jpg)
-* [HVAC widget]
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl.jpg)
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC_dark.jpg)
 * The weather widget shown in the screenshots can be found in the community
