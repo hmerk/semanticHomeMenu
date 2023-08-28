@@ -9,7 +9,7 @@ Group members have to follow the naming shown in the example Items definition.
 
 ## Usage
 
-Example for textual item import *(TBC)
+Example for textual item import (TBC)
 ```csv
 Group                   RadiatorChild               "Radiator Childroom"    <radiator>      (Childroom)     ["RadiatorControl"]             {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Radiator", location="Childroom"]}
 
