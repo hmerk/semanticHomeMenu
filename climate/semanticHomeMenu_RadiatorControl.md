@@ -1,14 +1,15 @@
 * [RadiatorControl widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControl.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControlExpanded_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RadiatorControlExpanded.jpg)
 
 The RadiatorControl card will show all radiator controls (thermostats) in a selected room and show controls based on equipment group members.
+Group members have to follow the naming shown in the example Items definition.
 
 ## Usage
 
-Example for textual item import
+Example for textual item import *(TBC)
 ```csv
 Group                   RadiatorChild               "Radiator Childroom"    <radiator>      (Childroom)     ["RadiatorControl"]             {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Radiator", location="Childroom"]}
 
