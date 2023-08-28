@@ -18,28 +18,14 @@ props:
       name: groupItemLocation
       required: false
       type: TEXT
-    - context: Text
-      default: orange
-      label: ColorScheme
-      name: colorScheme
-      required: true
-      type: TEXT
-    - context: Text
-      default: RGB(255,153,0)
-      label: RGB ColorScheme
-      name: rgbColorScheme
-      required: true
-      type: TEXT
-    - context: Text
-      default: FF9900
-      label: Hex ColorScheme
-      name: hexColorScheme
-      required: true
-      type: TEXT
-timestamp: Aug 5, 2023, 11:46:51 PM
+timestamp: Aug 24, 2023, 10:44:39 PM
 component: f7-card
 config:
   style:
+    --my-colorScheme: =(items[props.groupItem+"_mode"].state=="COOL")?"#15B4B7":(items[props.groupItem+"_mode"].state=="HEAT")?"#E74239":(items[props.groupItem+"_mode"].state=="DRY")?"#E7D200":"gray"
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
     min-width: 360px
   stylesheet: >
     
@@ -136,7 +122,7 @@ slots:
                         config:
                           style:
                             background: none
-                            color: red
+                            color: var(--my-colorScheme)
                             justify-content: flex-end
                           text: =@(props.groupItem+"_targetTemp")
           - component: f7-col
@@ -152,9 +138,9 @@ slots:
               default:
                 - component: oh-toggle
                   config:
-                    item: =props.powerItem
+                    item: =props.groupItem+"_power"
                     style:
-                      --f7-toggle-active-color: =(items[props.modeItem].state=="COOL")?"#15B4B7":(items[props.modeItem].state=="HEAT")?"#E74239":(items[props.modeItem].state=="DRY")?"#E7D200":"gray"
+                      --f7-toggle-active-color: var(--my-colorScheme)
           - component: f7-col
             config:
               class:
@@ -242,7 +228,7 @@ slots:
                                       style:
                                         height: 100%
                                         width: 100%
-                                      trendGradient: =[(items[props.modeItem].state=='COOL')?('#15B4B7'):(items[props.modeItem].state=='HEAT')?('#E74239'):(items[props.modeItem].state=='DRY')?('#E7D200'):('gray'),('gray')]
+                                      trendGradient: =[(items[props.groupItem+"_mode"].state=='COOL')?('#15B4B7'):(items[props.groupItem+"_mode"].state=='HEAT')?('#E74239'):(items[props.groupItem+"_mode"].state=='DRY')?('#E7D200'):('gray'),('gray')]
                                       trendItem: =props.groupItem + "_ambientTemp"
                                       trendStrokeWidth: 2
                 - component: f7-col
@@ -274,7 +260,7 @@ slots:
                                 iconF7: arrow_up_circle
                                 iconSize: 32
                                 style:
-                                  color: '=(items[props.modeItem].state=="COOL") ? "#15B4B7" : (items[props.modeItem].state=="HEAT") ? "#E74239" : (items[props.modeItem].state=="DRY") ? "#E7D200" : "gray"'
+                                  color: var(--my-colorScheme)
                                   height: auto
                             - component: oh-button
                               config:
@@ -284,7 +270,7 @@ slots:
                                 iconF7: arrow_down_circle
                                 iconSize: 32
                                 style:
-                                  color: '=(items[props.modeItem].state=="COOL") ? "#15B4B7" : (items[props.modeItem].state=="HEAT") ? "#E74239" : (items[props.modeItem].state=="DRY") ? "#E7D200" : "gray"'
+                                  color: var(--my-colorScheme)
                                   height: auto
           - component: f7-card-footer
             config:
