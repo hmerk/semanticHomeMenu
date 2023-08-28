@@ -95,6 +95,7 @@ Group:Number:COUNT(OPEN)      gWindowsOpen                                  "Win
 Group:Number:COUNT(OPEN)      gDoorsOpen                                    "Doors Open"                                           
 Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"                                      
 ```
+These items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar.
 
 ## Community
 Please check [openHAB community]for discussions and proposals.
