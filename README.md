@@ -27,7 +27,7 @@ and the the Bottom Navigation Bar.
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_unselected.jpg)
 
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_ScenesSlected.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_ScenesSelected.jpg)
 
 * [HomeMenu]
 * [semanticHomeMenu]
