@@ -2,9 +2,9 @@
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/LowBattery.jpg)
 
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/LowBatteryExpanded.jpg)
+The Eergy widget card used by semanticHomeMenu will by default show information about empty batteries as an accordion list.
 
-The Eergy widget card used by semanticHomeMenu will show by default an information about empty batteries as an accorion list.
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/LowBatteryExpanded.jpg)
 
 ### Usage
 Example for textual item import (TBD)
