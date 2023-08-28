@@ -2,10 +2,13 @@
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC.jpg)
 
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVACExpanded.jpg)
+
 The HVAC widget card used by main_widget will show all kind of HVAC (air conditioner) equipment in a selected room and show controlls based on equipment group members.
+Group members need to follow the naming shown in the example Item definition.
 
 ### Usage
-Example for textual item import
+Example for textual item import (TBD)
 ```csv
 Group                   hvacChild               "HVAC Childroom"       <climate>            (Childroom) ["HVAC"]    {uiSemantics="uiSemantics"[preposition=" in the ", equipment="HVAC", location="Childroom"]}
 
