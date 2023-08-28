@@ -1,6 +1,6 @@
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Rollershutter.jpg)
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RollershutterExpanded_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/RollershutterExpanded.jpg)
 
 The rollershutter card is one of the sub widgets to let you control your rollershutters with a unique look and feel.
 Apart from just controlling your rollershutters with sending up and down commands, you can also send predefined values like 50% to your device.
@@ -25,7 +25,7 @@ to
   - A Switch item to enable/disable the automatic/time control [optional]
   - 4 DateTime items for holding the different Times, openWeekday, closeWeekday, openWeekend, closeWeekend [optional]
 
-Example for textual item import
+Example for textual item import (TBC)
 ```csv
 Group                   RollershutterChild      "Rollershutter Childroom"   <blinds>    (Childroom)          ["Blinds"]                 {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Rollershutter", location="Childroom"]}
 
