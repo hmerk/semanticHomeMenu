@@ -31,6 +31,8 @@ Bottom Navigation Bar with Scenes selected
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/BottomNavbar_ScenesSelected.jpg)
 
+The red indicator badges are shown if there is any alarm, whether security or low battery. Usage and setup will be explained in the security and energy widget documentation.
+
 * [Security widget]
   * including the [Keypad widget]
   
