@@ -1,4 +1,4 @@
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scene_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Scenes.jpg)
 
 This widget uses the new scenes introduced with openHAB 4.0, therefore no configuration is needed.
 keep in mind, by design, all scenes are stateless!
