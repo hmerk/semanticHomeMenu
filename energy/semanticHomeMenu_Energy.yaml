@@ -1,19 +1,12 @@
 uid: semanticHomeMenu_Energy
 tags: []
-props:
-  parameters:
-    - context: item
-      description: Security Group Item
-      label: Security Group
-      name: securityGroup
-      required: true
-      type: TEXT
-timestamp: Aug 3, 2023, 11:45:37 PM
+props: {}
+timestamp: Aug 28, 2023, 12:54:35 PM
 component: f7-card
 config:
   style:
     --f7-card-header-border-color: transparent
-    background: =(themeOptions.dark=="light") ? ("white"):("black")
+    background: =themeOptions.dark=="light" ? "white"
     border-radius: 10px
     margin-left: 5px
     margin-right: 5px
@@ -33,13 +26,13 @@ slots:
               default:
                 - component: oh-list-item
                   config:
-                    noChevron: '=(items.gBatteryLowTotal.state == "0") ? true : false'
                     icon: '=(items.gBatteryLowTotal.state == "0") ? "iconify:fluent:battery-checkmark-24-filled" : "iconify:fluent:battery-warning-24-filled"'
                     iconColor: '=(items.gBatteryLowTotal.state == "0") ? "green" : "red"'
+                    noChevron: '=(items.gBatteryLowTotal.state == "0") ? true : false'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
-                    subtitle: =(items.gBatteryLowTotal.state) + " batteries need attention"
+                    subtitle: =(items.gBatteryLowTotal.state.split('.')[0]) + " batterie(s) need(s) attention"
                     title: Batteries
                   slots:
                     accordion:
