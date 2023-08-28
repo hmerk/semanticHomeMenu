@@ -1,4 +1,4 @@
-uid: semanticHomeMenu_Energy
+uid: semanticHomeMenu_Security
 tags: []
 props:
   parameters:
@@ -8,11 +8,10 @@ props:
       name: securityGroup
       required: true
       type: TEXT
-timestamp: Aug 24, 2023, 10:27:46 PM
+timestamp: Aug 28, 2023, 8:48:03 AM
 component: f7-card
 config:
   style:
-    --f7-card-header-border-color: transparent
     background: =themeOptions.dark=="light" ? "white"
     border-radius: 10px
     margin-left: 5px
@@ -25,6 +24,102 @@ slots:
           height: auto
       slots:
         default:
+          - component: f7-row
+            config:
+              style:
+                justify-content: space-between
+            slots:
+              default:
+                - component: f7-col
+                  config:
+                    style:
+                      text-align: center
+                  slots:
+                    default:
+                      - component: oh-button
+                        config:
+                          action: popup
+                          actionModal: widget:semanticHomeMenu_Security_Keypad
+                          actionModalConfig:
+                            securityGroup: =props.securityGroup
+                            targetMode: armed-home
+                          class:
+                            - padding-top-half
+                            - display-flex
+                            - flex-direction-column
+                          fill: '=vars.objVar.selectThing=="Security" ? true : false'
+                          icon-f7: checkmark_shield_fill
+                          iconColor: '=items[props.securityGroup+"_mode"].state != "armed-home"  ? "gray" : "red"'
+                          iconSize: 60
+                          style:
+                            --f7-button-bg-color: transparent
+                            --f7-button-hover-bg-color: '=vars.objVar.selectThing=="Security" ? "F8BB00" : "transparent"'
+                            --f7-button-padding-horizontal: 0px
+                            --f7-button-padding-vertical: 0px
+                            --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
+                            font-size: 14px
+                            height: auto
+                          text: ARMED HOME
+                - component: f7-col
+                  config:
+                    style:
+                      text-align: center
+                  slots:
+                    default:
+                      - component: oh-button
+                        config:
+                          action: popup
+                          actionModal: widget:semanticHomeMenu_Security_Keypad
+                          actionModalConfig:
+                            securityGroup: =props.securityGroup
+                            targetMode: disarmed
+                          class:
+                            - padding-top-half
+                            - display-flex
+                            - flex-direction-column
+                          fill: '=vars.objVar.selectThing=="Security" ? true : false'
+                          icon-f7: checkmark_shield_fill
+                          iconColor: '=items[props.securityGroup+"_mode"].state != "disarmed"  ? "gray" : "green"'
+                          iconSize: 60
+                          style:
+                            --f7-button-bg-color: transparent
+                            --f7-button-hover-bg-color: '=vars.objVar.selectThing=="Security" ? "F8BB00" : "transparent"'
+                            --f7-button-padding-horizontal: 0px
+                            --f7-button-padding-vertical: 0px
+                            --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
+                            font-size: 14px
+                            height: auto
+                          text: DISARMED
+                - component: f7-col
+                  config:
+                    style:
+                      text-align: center
+                  slots:
+                    default:
+                      - component: oh-button
+                        config:
+                          action: popup
+                          actionModal: widget:semanticHomeMenu_Security_Keypad
+                          actionModalConfig:
+                            securityGroup: =props.securityGroup
+                            targetMode: armed-away
+                          class:
+                            - padding-top-half
+                            - display-flex
+                            - flex-direction-column
+                          fill: '=vars.objVar.selectThing=="Security" ? true : false'
+                          icon-f7: checkmark_shield_fill
+                          iconColor: '=items[props.securityGroup+"_mode"].state != "armed-away"  ? "gray" : "red"'
+                          iconSize: 60
+                          style:
+                            --f7-button-bg-color: transparent
+                            --f7-button-hover-bg-color: '=vars.objVar.selectThing=="Security" ? "F8BB00" : "transparent"'
+                            --f7-button-padding-horizontal: 0px
+                            --f7-button-padding-vertical: 0px
+                            --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
+                            font-size: 14px
+                            height: auto
+                          text: ARMED AWAY
           - component: f7-list
             config:
               accordionList: true
@@ -33,37 +128,250 @@ slots:
               default:
                 - component: oh-list-item
                   config:
-                    icon: '=(items.gBatteryLowTotal.state == "0") ? "iconify:fluent:battery-checkmark-24-filled" : "iconify:fluent:battery-warning-24-filled"'
-                    iconColor: '=(items.gBatteryLowTotal.state == "0") ? "green" : "red"'
-                    noChevron: '=(items.gBatteryLowTotal.state == "0") ? true : false'
+                    icon: '=items.gSmokeAlarm.state == "0" ? "iconify:material-symbols:detector-smoke" : "iconify:material-symbols:detector-alarm"'
+                    iconColor: '=items.gSmokeAlarm.state == "0" ? "gray" : "red"'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
-                    subtitle: =(items.gBatteryLowTotal.state.split('.')[0]) + " batterie(s) need(s) attention"
-                    title: Batteries
+                      margin-top: 30px
+                    title: Smoke Detectors
                   slots:
                     accordion:
                       - component: f7-list
                         config:
                           mediaList: true
                           style:
-                            background-color: "=themeOptions.dark === 'dark' ? 'rgb(35, 35, 35)' : 'rgb(247, 247, 247)'"
+                            background-color: transparent
                         slots:
                           default:
                             - component: oh-repeater
                               config:
+                                accordionList: true
+                                cacheSource: true
                                 fetchMetadata: semantics,widgetOrder,uiSemantics
-                                filter: loop.i.state == "ON"
-                                for: i
+                                for: smokeSensorMember
                                 fragment: true
-                                itemTags: Lowbattery,Energy
+                                groupItem: gSmokeAlarm
+                                sourceType: itemsInGroup
+                              slots:
+                                default:
+                                  - component: oh-list-item
+                                    config:
+                                      after: '=items[loop.smokeSensorMember.name].state != "OFF" ? "ALARM" : "OK"'
+                                      icon: '=items[loop.smokeSensorMember.name].state != "OFF" ? "iconify:material-symbols:detector-alarm" : "iconify:material-symbols:detector-smoke"'
+                                      iconColor: '=items[loop.smokeSensorMember.name].state != "OFF" ? "red" : "gray"'
+                                      item: =loop.smokeSensorMember.name
+                                      title: =loop.smokeSensorMember.metadata.uiSemantics.config.location
+          - component: f7-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: oh-list-item
+                  config:
+                    icon: '=items.gMotionDetected.state == "0" ? "motion-closed" : "motion-open"'
+                    iconColor: '=items.gMotionDetected.state == "0" ? "gray" : "red"'
+                    style:
+                      --f7-list-item-after-font-size: 16px
+                      --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
+                      margin-top: 30px
+                    title: Motion Detectors
+                  slots:
+                    accordion:
+                      - component: f7-list
+                        config:
+                          mediaList: true
+                          style:
+                            background-color: transparent
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                accordionList: true
+                                cacheSource: true
+                                fetchMetadata: semantics,widgetOrder,uiSemantics
+                                filter: '(loop.motionDetector.category=="motion") ? true : false'
+                                for: motionDetector
+                                fragment: true
+                                groupItem: gMotionDetected
+                                sourceType: itemsInGroup
+                              slots:
+                                default:
+                                  - component: oh-list-item
+                                    config:
+                                      after: '=items[loop.motionDetector.name].state != "ON" ? "NO-Motion" : "MOTION"'
+                                      icon: '=items[loop.motionDetector.name].state == "ON" ? "motion-open" : "motion-closed"'
+                                      iconColor: '=items[loop.motionDetector.name].state != "ON" ? "red" : "gray"'
+                                      item: =loop.motionDetector.name
+                                      title: =loop.motionDetector.metadata.uiSemantics.config.location
+          - component: f7-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: oh-list-item
+                  config:
+                    icon: material:video_camera_front
+                    iconColor: gray
+                    style:
+                      --f7-list-item-after-font-size: 16px
+                      --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
+                      margin-top: 30px
+                    title: Surveillance
+                  slots:
+                    accordion:
+                      - component: f7-list
+                        config:
+                          mediaList: true
+                          style:
+                            background-color: transparent
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                accordionList: true
+                                cacheSource: true
+                                fetchMetadata: semantics,widgetOrder,uiSemantics
+                                filter: '(loop.surveilance.category=="switch") || (loop.surveilance.category=="Switch") ? true : false'
+                                for: surveilance
+                                fragment: true
+                                itemTags: Camera
                                 sourceType: itemsWithTags
                               slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      footer: =loop.i.metadata.uiSemantics.config.preposition + loop.i.metadata.uiSemantics.config.location
-                                      icon: '=(loop.i.state == "ON") ? "f7:battery_0" : "f7:battery_100"'
-                                      iconColor: '=(loop.i.state == "ON") ? "red" : "green"'
-                                      item: =loop.i.name
-                                      title: =loop.i.metadata.uiSemantics.config.equipment
+                                      after: '=items[loop.surveilance.name].state != "ON" ? "OFF" : "ON"'
+                                      icon: material:video_camera_front
+                                      iconColor: '=items[loop.surveilance.name].state != "ON" ? "gray" : "red"'
+                                      item: =loop.surveilance.name
+                                      title: =loop.surveilance.metadata.uiSemantics.config.location
+          - component: f7-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: oh-list-item
+                  config:
+                    icon: material:roller_shades
+                    iconColor: gray
+                    style:
+                      --f7-list-item-after-font-size: 16px
+                      --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
+                      margin-top: 30px
+                    title: Blinds
+                  slots:
+                    accordion:
+                      - component: f7-list
+                        config:
+                          mediaList: true
+                          style:
+                            background-color: transparent
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                accordionList: true
+                                cacheSource: true
+                                fetchMetadata: semantics,widgetOrder,uiSemantics
+                                filter: '((loop.shadesMember.category == "rollershutter") || ((loop.shadesMember.category).includes("Rollershutter"))) ? true : false'
+                                for: shadesMember
+                                fragment: true
+                                itemTags: Opening
+                                sourceType: itemsWithTags
+                              slots:
+                                default:
+                                  - component: oh-list-item
+                                    config:
+                                      after: '=items[loop.shadesMember.name].state != "100" ? "OPEN" : "CLOSED"'
+                                      title: =loop.shadesMember.metadata.uiSemantics.config.location
+                                      icon: '=(loop.shadesMember.state == "0") ? "material:roller_shades" : "material:roller_shades"'
+                                      iconColor: gray
+                                      item: =loop.shadesMember.name
+          - component: f7-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: oh-list-item
+                  config:
+                    icon: material:sensor_door
+                    iconColor: '=items.gDoorsOpen.state == "0" ? "gray" : "red"'
+                    style:
+                      --f7-list-item-after-font-size: 16px
+                      --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
+                      margin-top: 30px
+                    title: Doors
+                  slots:
+                    accordion:
+                      - component: f7-list
+                        config:
+                          mediaList: true
+                          style:
+                            background-color: transparent
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                accordionList: true
+                                cacheSource: true
+                                fetchMetadata: semantics,widgetOrder,uiSemantics
+                                for: doorMember
+                                fragment: true
+                                groupItem: gDoorsOpen
+                                sourceType: itemsInGroup
+                              slots:
+                                default:
+                                  - component: oh-list-item
+                                    config:
+                                      after: '=items[loop.doorMember.name].state != "CLOSED" ? "OPEN" : "CLOSED"'
+                                      icon: material:sensor_door
+                                      iconColor: '=items[loop.doorMember.name].state != "CLOSED" ? "red" : "gray"'
+                                      item: =loop.doorMember.name
+                                      title: =loop.doorMember.metadata.uiSemantics.config.location
+          - component: f7-list
+            config:
+              accordionList: true
+              mediaList: true
+            slots:
+              default:
+                - component: oh-list-item
+                  config:
+                    icon: material:sensor_window
+                    iconColor: '=items.gWindowsOpen.state == "0" ? "gray" : "red"'
+                    style:
+                      --f7-list-item-after-font-size: 16px
+                      --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
+                      margin-top: 30px
+                    title: Windows
+                  slots:
+                    accordion:
+                      - component: f7-list
+                        config:
+                          mediaList: true
+                          style:
+                            background-color: transparent
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                accordionList: true
+                                cacheSource: true
+                                fetchMetadata: semantics,widgetOrder,uiSemantics
+                                for: windowMember
+                                fragment: true
+                                groupItem: gWindowsOpen
+                                sourceType: itemsInGroup
+                              slots:
+                                default:
+                                  - component: oh-list-item
+                                    config:
+                                      after: '=items[loop.windowMember.name].state != "CLOSED" ? "OPEN" : "CLOSED"'
+                                      icon: material:sensor_window
+                                      iconColor: '=items[loop.windowMember.name].state != "CLOSED" ? "red" : "gray"'
+                                      item: =loop.windowMember.name
+                                      title: =loop.windowMember.metadata.uiSemantics.config.location
