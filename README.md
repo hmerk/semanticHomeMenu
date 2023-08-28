@@ -65,12 +65,11 @@ Please check [openHAB community]for discussions and proposals.
 
 ## Credits
 Thanks to 
-@Dimitris for creating the design specs
-@Nic02 for creating the widgets
-@JustinG for his excellent support when we strugled with design and functionality
-@NicoR for his style and code optimizations
+- @Dimitris for creating the design specs
+- @Nic02 for creating the widgets
+- @JustinG for his excellent support when we strugled with design and functionality
+- @NicoR for his style and code optimizations
 and anyone else I have forgotten
 
 ## Resources
-
-
+https://github.com/hmerk/semanticHomeMenu/blob/main/main/semanticHomeMenu.yaml
