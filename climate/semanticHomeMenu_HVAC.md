@@ -1,6 +1,6 @@
 * [HVAC widget]
   
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC_dark.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/HVAC.jpg)
 
 The HVAC widget card used by main_widget will show all kind of HVAC (air conditioner) equipment in a selected room and show controlls based on equipment group members.
 
