@@ -626,16 +626,8 @@ slots:
                 - no-padding
             slots:
               default:
-                - component: widget:Cell_Weather_1
+                - component: widget:semanticHomeMenu_Weather
                   config:
-                    visible: '=(!vars.objVar || ((vars.objVar.selectSection=="SECTION0") && !vars.objVar.selectThing)) ? true : false'
-                - component: widget:Cell_Weather_Actual_1
-                  config:
-                    item_hum: OneCallAPIweatherandforecast_ForecastDay3_Humidity
-                    item_rain: OneCallAPIweatherandforecast_Current_Rain
-                    item_temp: OneCallAPIweatherandforecast_Current_Temperature
-                    item_wind: OneCallAPIweatherandforecast_ForecastDay3_Windspeed
-                    item_wind_dir: OneCallAPIweatherandforecast_Current_Winddirection
                     visible: '=(!vars.objVar || ((vars.objVar.selectSection=="SECTION0") && !vars.objVar.selectThing)) ? true : false'
                 - component: oh-repeater
                   config:
