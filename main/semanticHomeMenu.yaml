@@ -21,7 +21,7 @@ props:
       name: bnavColor
       required: false
       type: TEXT
-timestamp: Aug 26, 2023, 11:03:18 PM
+timestamp: Oct 31, 2023, 11:25:05 PM
 component: f7-block
 config:
   style:
@@ -740,6 +740,7 @@ slots:
                                                     - component: widget:semanticHomeMenu_Lights
                                                       config:
                                                         colorScheme: var(--my-text-colorScheme)
+                                                        groupCategory: =loop.equipmentItem.category
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
                                                         groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
