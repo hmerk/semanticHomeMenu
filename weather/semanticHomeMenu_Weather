@@ -1,0 +1,1103 @@
+uid: semanticHomeMenu_Weather
+tags: []
+props: {}
+timestamp: Oct 31, 2023, 11:11:44 PM
+component: f7-card
+config:
+  style:
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
+    min-width: 360px
+slots:
+  default:
+    - component: f7-row
+      config:
+        class:
+          - justify-content-left
+          - align-items-center
+          - display-flex
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - flex-direction-column
+              style:
+                flex-grow: 1
+                height: 100%
+                margin-left: 15px
+                width: 30%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    style:
+                      margin-top: 10px
+                      overflow: hidden
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 16px
+                          text: =items.Localweatherandforecast_StationName.state
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-column
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 32px
+                          text: =Number.parseInt(items.OneCallAPIweatherandforecast_Current_Temperature.state)+"°"
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - flex-direction-column
+              style:
+                flex-grow: 1
+                height: 100%
+                width: 30%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - justify-content-center
+                      - display-flex
+                    style:
+                      height: 25px
+                      overflow: hidden
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            color: transparent
+                            font-size: 14px
+                            margin-right: 15px
+                          text: dummy
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-row
+                    style:
+                      width: 100%
+                      height: 20px
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-right
+                          style:
+                            height: 100%
+                            width: 50%
+                        slots:
+                          default:
+                            - component: f7-icon
+                              config:
+                                f7: sunrise
+                                size: 20
+                                style:
+                                  padding-right: 5px
+                      - component: f7-col
+                        config:
+                          style:
+                            width: 50%
+                        slots:
+                          default:
+                            - component: Label
+                              config:
+                                style:
+                                  font-size: 14px
+                                  padding-left: 5px
+                                text: =dayjs(items.OneCallAPIweatherandforecast_ForecastToday_Sunrise.state).format("HH:mm")
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - flex-direction-row
+                    style:
+                      width: 100%
+                      height: 20px
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-right
+                          style:
+                            height: 100%
+                            width: 50%
+                        slots:
+                          default:
+                            - component: f7-icon
+                              config:
+                                f7: sunset
+                                size: 20
+                                style:
+                                  padding-right: 5px
+                      - component: f7-col
+                        config:
+                          style:
+                            width: 50%
+                        slots:
+                          default:
+                            - component: Label
+                              config:
+                                style:
+                                  font-size: 14px
+                                  padding-left: 5px
+                                text: =dayjs(items.OneCallAPIweatherandforecast_ForecastToday_Sunset.state).format("HH:mm")
+          - component: f7-col
+            config:
+              class:
+                - display-flex
+                - flex-direction-column
+              style:
+                flex-grow: 1
+                height: 100%
+                width: 30%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - justify-content-right
+                      - display-flex
+                    style:
+                      overflow: hidden
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-icon
+                        config:
+                          f7: "=(items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastToday_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                          size: 25
+                          style:
+                            margin-right: 15px
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - justify-content-right
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 14px
+                            margin-right: 15px
+                          text: =items.OneCallAPIweatherandforecast_Current_Condition.state
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                      - justify-content-right
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: Label
+                        config:
+                          style:
+                            font-size: 14px
+                            margin-right: 15px
+                          text: '="H: "+Number.parseInt(items.OneCallAPIweatherandforecast_ForecastToday_Maxtemperature.state) +"°  T: "+Number.parseInt(items.OneCallAPIweatherandforecast_ForecastToday_Mintemperature.state) + "°"'
+    - component: f7-block
+      config:
+        class:
+          - no-padding
+        style:
+          margin-top: 10px
+          overflow: hidden
+          width: 100%
+      slots:
+        default:
+          - component: f7-card-footer
+            config: {}
+            slots:
+              default:
+                - component: f7-block
+                  config:
+                    class:
+                      - no-padding
+                      - no-margin
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-row
+                        config:
+                          class:
+                            - align-items-center
+                            - display-flex
+                        slots:
+                          default:
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours01_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours01_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours01_Temperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours02_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours02_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours02_Temperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours03_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours03_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours03_Temperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours04_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours04_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours04_Temperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours05_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours05_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours05_Temperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs(items.OneCallAPIweatherandforecast_ForecastHours06_Timestamp.state).format("HH:mm")
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastHours06_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastHours06_Temperature.state)+"°"
+    - component: f7-block
+      config:
+        class:
+          - no-padding
+        style:
+          margin-top: 10px
+          overflow: hidden
+          width: 100%
+      slots:
+        default:
+          - component: f7-card-footer
+            config: {}
+            slots:
+              default:
+                - component: f7-block
+                  config:
+                    class:
+                      - no-padding
+                      - no-margin
+                    style:
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-row
+                        config:
+                          class:
+                            - align-items-center
+                            - display-flex
+                        slots:
+                          default:
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                                  width: 5%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                        - align-items-center
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs().add(1,'day').startOf('day').format('dd')
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs().add(2,'day').startOf('day').format('dd')
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs().add(3,'day').startOf('day').format('dd')
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs().add(4,'day').startOf('day').format('dd')
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =dayjs().add(5,'day').startOf('day').format('dd')
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                                  width: 5%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastTomorrow_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastDay2_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastDay3_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastDay4_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-icon
+                                          config:
+                                            f7: "=(items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '01d') ? 'sun_max' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '01n') ? 'moon_stars' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '02d') ? 'cloud_sun' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '02n') ? 'cloud_moon' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '03d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '03n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '04d') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '04n') ? 'cloud' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '09d') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '09n') ? 'cloud_heavyrain' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '10d') ? 'cloud_sun_rain' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '10n') ? 'cloud_moon_rain' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '11d') ? 'cloud_sun_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '11n') ? 'cloud_moon_bolt' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '13d') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '13n') ? 'cloud_snow' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '50d') ? 'cloud_fog' : (items.OneCallAPIweatherandforecast_ForecastDay5_Iconid.state === '50n') ? 'cloud_fog' : '?'"
+                                            size: 25
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                                  width: 5%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                              margin-left: 10px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastTomorrow_Mintemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                              margin-left: 10px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay2_Mintemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                              margin-left: 10px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay3_Mintemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                              margin-left: 10px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay4_Mintemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                              margin-left: 10px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay5_Mintemperature.state)+"°"
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                                  width: 60%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-range
+                                          config:
+                                            color: blue
+                                            disabled: true
+                                            dual: true
+                                            max: =Number.parseInt(items.maxTempForecastDays.state)
+                                            min: =Number.parseInt(items.minTempForecastDays.state)
+                                            style:
+                                              --f7-range-bar-bg-color: transparent
+                                              --f7-range-bar-size: 4px
+                                              --f7-range-knob-size: 0px
+                                            value:
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastTomorrow_Mintemperature.state)
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastTomorrow_Maxtemperature.state)
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-range
+                                          config:
+                                            color: blue
+                                            disabled: true
+                                            dual: true
+                                            max: =Number.parseInt(items.maxTempForecastDays.state)
+                                            min: =Number.parseInt(items.minTempForecastDays.state)
+                                            style:
+                                              --f7-range-bar-bg-color: transparent
+                                              --f7-range-bar-size: 4px
+                                              --f7-range-knob-size: 0px
+                                            value:
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay2_Mintemperature.state)
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay2_Maxtemperature.state)
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-range
+                                          config:
+                                            color: blue
+                                            disabled: true
+                                            dual: true
+                                            max: =Number.parseInt(items.maxTempForecastDays.state)
+                                            min: =Number.parseInt(items.minTempForecastDays.state)
+                                            style:
+                                              --f7-range-bar-bg-color: transparent
+                                              --f7-range-bar-size: 4px
+                                              --f7-range-knob-size: 0px
+                                            value:
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay3_Mintemperature.state)
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay3_Maxtemperature.state)
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-range
+                                          config:
+                                            color: blue
+                                            disabled: true
+                                            dual: true
+                                            max: =Number.parseInt(items.maxTempForecastDays.state)
+                                            min: =Number.parseInt(items.minTempForecastDays.state)
+                                            style:
+                                              --f7-range-bar-bg-color: transparent
+                                              --f7-range-bar-size: 4px
+                                              --f7-range-knob-size: 0px
+                                            value:
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay4_Mintemperature.state)
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay4_Maxtemperature.state)
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-left
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: f7-range
+                                          config:
+                                            color: blue
+                                            disabled: true
+                                            dual: true
+                                            max: =Number.parseInt(items.maxTempForecastDays.state)
+                                            min: =Number.parseInt(items.minTempForecastDays.state)
+                                            style:
+                                              --f7-range-bar-bg-color: transparent
+                                              --f7-range-bar-size: 4px
+                                              --f7-range-knob-size: 0px
+                                            value:
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay5_Mintemperature.state)
+                                              - =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay5_Maxtemperature.state)
+                            - component: f7-col
+                              config:
+                                class:
+                                  - display-flex
+                                  - flex-direction-column
+                                style:
+                                  flex-grow: 1
+                                  height: 100%
+                                  width: 5%
+                              slots:
+                                default:
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastTomorrow_Maxtemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay2_Maxtemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay3_Maxtemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay4_Maxtemperature.state)+"°"
+                                  - component: f7-row
+                                    config:
+                                      class:
+                                        - justify-content-center
+                                        - display-flex
+                                      style:
+                                        height: 25px
+                                        overflow: hidden
+                                        width: 100%
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            style:
+                                              font-size: 14px
+                                            text: =Number.parseInt(items.OneCallAPIweatherandforecast_ForecastDay5_Maxtemperature.state)+"°"
