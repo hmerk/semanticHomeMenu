@@ -21,7 +21,7 @@ props:
       name: bnavColor
       required: false
       type: TEXT
-timestamp: Oct 31, 2023, 11:25:05 PM
+timestamp: Dec 22, 2023, 10:09:59 AM
 component: f7-block
 config:
   style:
@@ -732,7 +732,71 @@ slots:
                                                     - component: widget:semanticHomeMenu_Lights
                                                       config:
                                                         colorScheme: var(--my-text-colorScheme)
-                                                        groupCategory: =loop.equipmentItem.category
+                                                        equipmentType: Lightbulb
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: DimmableLight
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: DimmableLight
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: ColorLight
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: ColorLight
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
                                                         groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
