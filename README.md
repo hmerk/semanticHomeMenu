@@ -6,7 +6,7 @@ The idea is to have a UI for [openHAB4](https://www.openhab.org/) that dynamical
 
 It is also possible to use the specialized widgets standalone or to extend the project with further widgets your own, some inspiration will be given later.
 
-![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/Startscreen.jpg)
+![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/semanticHomeMenu.jpg)
 
 ## History
 An openHAB 4 specific version became necessary because we identified some strong performance issues in "main_widget" due to the heavy usage of the oh-repeater component, which is used to gather all semantic information needed to reduce configuration commplexity.
