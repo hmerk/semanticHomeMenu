@@ -22,8 +22,8 @@ props:
       type: TEXT
     - context: Text
       description: Calculated by oh-repeater
-      label: Light Equipment Category
-      name: groupCategory
+      label: Light Equipment Type
+      name: equipmentType
       required: false
       type: TEXT
     - context: Text
@@ -32,7 +32,7 @@ props:
       name: colorScheme
       required: true
       type: TEXT
-timestamp: Oct 31, 2023, 11:52:13 PM
+timestamp: Dec 22, 2023, 9:49:29 AM
 component: f7-card
 config:
   style:
@@ -122,13 +122,13 @@ slots:
                 - margin-right
               style:
                 height: 100%
-                padding-right: '=props.groupCategory != "lightbulb" ? "0" : "30px"'
+                padding-right: '=props.equipmentType != "Lightbulb" ? "0" : "30px"'
                 width: auto
             slots:
               default:
                 - component: oh-toggle
                   config:
-                    item: '=props.groupCategory != "lightbulb" ? props.groupItem + "_brightness" : props.groupItem + "_switch"'
+                    item: '=props.equipmentType != "Lightbulb" ? props.groupItem + "_brightness" : props.groupItem + "_switch"'
                     style:
                       --f7-toggle-active-color: =props.colorScheme
           - component: f7-col
@@ -147,7 +147,7 @@ slots:
                     action: variable
                     actionVariable: openAccordion
                     actionVariableValue: '=(vars.openAccordion== "null") ? true : !(vars.openAccordion)'
-                    visible: "=props.groupCategory != 'lightbulb' ? 'true' : 'false'"
+                    visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
                   slots:
                     default:
                       - component: oh-icon
@@ -182,7 +182,7 @@ slots:
                 - component: Label
                   config:
                     style:
-                      display: "=props.groupCategory === 'colorlight' ? '' : 'none !important'"
+                      display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
                       font-size: 13px
                       font-weight: var(--f7-list-item-footer-font-weight)
                       line-height: 0.5
@@ -190,7 +190,7 @@ slots:
                     text: Ambiance
                 - component: oh-slider
                   config:
-                    item: "=props.groupCategory != 'colorlight' ? '' : props.groupItem + '_colorTemperature'"
+                    item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_colorTemperature'"
                     max: 100
                     min: 0
                     style:
@@ -199,7 +199,7 @@ slots:
                       margin-right: 10px
                       margin-top: 15px
                       width: calc(100% - 1rem)
-                    visible: "=props.groupCategory === 'colorlight' ? 'true' : 'false'"
+                    visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
           - component: f7-row
             config:
               class:
@@ -214,7 +214,7 @@ slots:
                 - component: Label
                   config:
                     style:
-                      display: "=props.groupCategory != 'lightbulb' ? '' : 'none !important'"
+                      display: "=props.equipmentType != 'Lightbulb' ? '' : 'none !important'"
                       font-size: 13px
                       font-weight: var(--f7-list-item-footer-font-weight)
                       line-height: 0.5
@@ -222,7 +222,7 @@ slots:
                     text: Brightness
                 - component: oh-slider
                   config:
-                    item: "=props.groupCategory != 'lightbulb' ? props.groupItem + '_brightness' : ''"
+                    item: "=props.equipmentType != 'Lightbulb' ? props.groupItem + '_brightness' : ''"
                     max: 100
                     min: 0
                     style:
@@ -231,7 +231,7 @@ slots:
                       margin-right: 10px
                       margin-top: 15px
                       width: calc(100% - 1rem)
-                    visible: "=props.groupCategory != 'lightbulb' ? 'true' : 'false'"
+                    visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
           - component: f7-row
             config:
               class:
@@ -246,7 +246,7 @@ slots:
                 - component: Label
                   config:
                     style:
-                      display: "=props.groupCategory === 'colorlight' ? '' : 'none !important'"
+                      display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
                       font-size: 13px
                       font-weight: var(--f7-list-item-footer-font-weight)
                       line-height: 0.5
@@ -254,12 +254,12 @@ slots:
                     text: RGB colors
                 - component: oh-colorpicker
                   config:
-                    item: "=props.groupCategory != 'colorlight' ? '' : props.groupItem + '_color'"
+                    item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_color'"
                     modules:
                       - rgb-sliders
                     style:
                       width: calc(100% - 1rem)
-                    visible: "=props.groupCategory === 'colorlight' ? 'true' : 'false'"
+                    visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
           - component: f7-card-footer
             config:
               style:
