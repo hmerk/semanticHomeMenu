@@ -26,6 +26,7 @@ slots:
               default:
                 - component: widget:frs_System_Info_list_item
                   config:
+                    CPULoadItem: Systeminfo_cpu_load
                     CPULoad15Item: Systeminfo_cpu_load15
                     CPULoad1Item: Systeminfo_cpu_load1
                     CPULoad5Item: Systeminfo_cpu_load5
@@ -48,5 +49,5 @@ slots:
                     SwapTotalItem: Systeminfo_swap_total
                     SwapUsedItem: Systeminfo_swap_used
                     SwapUsedPercentItem: Systeminfo_swap_usedPercent
-                    SystemOHTitle: openHAB 4 @ NiPoGi
+                    SystemOHTitle: openHAB 4 @ home
                     SystemUptimeItem: Systeminfo_cpu_uptime
