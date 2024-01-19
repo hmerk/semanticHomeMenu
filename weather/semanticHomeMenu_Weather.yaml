@@ -124,7 +124,7 @@ slots:
                                 style:
                                   font-size: 14px
                                   padding-left: 5px
-                                text: =dayjs(items.OneCallAPIweatherandforecast_ForecastToday_Sunrise.state).format("HH:mm")
+                                text: =dayjs(items.OneCallAPIweatherandforecast_Current_Sunrise.state).format("HH:mm")
                 - component: f7-row
                   config:
                     class:
@@ -162,7 +162,7 @@ slots:
                                 style:
                                   font-size: 14px
                                   padding-left: 5px
-                                text: =dayjs(items.OneCallAPIweatherandforecast_ForecastToday_Sunset.state).format("HH:mm")
+                                text: =dayjs(items.OneCallAPIweatherandforecast_Current_Sunset.state).format("HH:mm")
           - component: f7-col
             config:
               class:
