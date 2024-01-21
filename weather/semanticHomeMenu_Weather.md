@@ -9,8 +9,8 @@ No additional configuration is needed. Just create the following Items and chang
 Please note, the temperature bars mostly appear after a menu change only. We have to figure out why.
 ```csv
 Group                       owmWeather                                                      "Weather Data"                        <climate>                                                                   ["WeatherService"]
-Group:Number:MIN            minTempForecastDays                                             "Minimum forecasted temperature for next 6 days"                  
-Group:Number:MAX            maxTempForecastDays                                             "Maximum forecasted temperature for next 6 days"                  
+Group:Number:Temperature:MIN  minTempForecastDays                                           "Minimum forecasted temperature for next 6 days"                  
+Group:Number:Temperature:MAX  maxTempForecastDays                                           "Maximum forecasted temperature for next 6 days"                  
 // Local weather and forecast Thing
 String                      Localweatherandforecast_StationName                             "Station Name"                                              (owmWeather)                                          ["Point"]                          {channel="openweathermap:weather-and-forecast:account:local:station#name"}
 // OneCall API Thing
