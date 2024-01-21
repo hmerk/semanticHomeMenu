@@ -736,7 +736,7 @@ slots:
                                                         equipmentType: Lightbulb
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -768,7 +768,7 @@ slots:
                                                         equipmentType: DimmableLight
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -800,7 +800,7 @@ slots:
                                                         equipmentType: ColorLight
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -832,7 +832,7 @@ slots:
                                                         equipmentType: ColorLight
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -863,7 +863,7 @@ slots:
                                                         colorScheme: var(--my-text-colorScheme)
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                         - component: oh-repeater
                                           config:
                                             cacheSource: true
@@ -894,7 +894,7 @@ slots:
                                                         colorScheme: var(--my-text-colorScheme)
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
                                                         hexColorScheme: var(--my-hex-colorScheme)
                                         - component: oh-repeater
                                           config:
@@ -925,7 +925,7 @@ slots:
                                                       config:
                                                         groupItem: =loop.equipmentItem.name
                                                         groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
-                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.rooms.label"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
           - component: f7-block
             config:
               class:
