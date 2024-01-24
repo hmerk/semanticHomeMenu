@@ -188,6 +188,7 @@ slots:
                       line-height: 0.5
                       margin-left: 1rem
                     text: Ambiance
+                    visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
                 - component: oh-slider
                   config:
                     item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_colorTemperature'"
@@ -220,6 +221,7 @@ slots:
                       line-height: 0.5
                       margin-left: 1rem
                     text: Brightness
+                    visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
                 - component: oh-slider
                   config:
                     item: "=props.equipmentType != 'Lightbulb' ? props.groupItem + '_brightness' : ''"
@@ -252,6 +254,7 @@ slots:
                       line-height: 0.5
                       margin-left: 1rem
                     text: RGB colors
+                    visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
                 - component: oh-colorpicker
                   config:
                     item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_color'"
