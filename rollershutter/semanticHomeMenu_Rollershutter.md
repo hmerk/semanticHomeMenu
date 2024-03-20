@@ -27,23 +27,44 @@ to
 
 Example for textual item import (TBC)
 ```csv
-Group                   RollershutterChild      "Rollershutter Childroom"   <blinds>    (Childroom)          ["Blinds"]                 {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Rollershutter", location="Childroom"]}
+Group                   rollershutterGroup      "Rollershutter Childroom"   <blinds>    (Childroom)          ["Blinds"]                 {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Rollershutter", location="Childroom"]}
 
-Rollershutter           rollershutterChild      "Rollershutter"             <blinds>    (RollershutterChild) ["Control", "Opening"]
-Switch                  rollerChildTimeControl  "Timecontrol"               <time>      (RollershutterChild) ["Control", "Timestamp"]
-DateTime                rollerOpenChildWeek     "Open Week"                 <time>      (RollershutterChild) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="1"}
-DateTime                rollerCloseChildWeek    "Close Week"                <time>      (RollershutterChild) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="2"}
-DateTime                rollerOpenChildWeekend  "Open Weekend"              <time>      (RollershutterChild) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="3"}
-DateTime                rollerCloseChildWeekend "Close Weekend"             <time>      (RollershutterChild) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="4"}
+Rollershutter           rollershutterGroup_Control      "Rollershutter"             <blinds>    (rollershutterGroup_Control) ["Control", "Opening"]
+Switch                  rollershutterGroup_TimeControl  "Timecontrol"               <time>      (rollershutterGroup_Control) ["Control", "Timestamp"]
+DateTime                rollershutterGroup_OpenWeek     "Open Week"                 <time>      (rollershutterGroup_Control) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="1"}
+DateTime                rollershutterGroup_CloseWeek    "Close Week"                <time>      (rollershutterGroup_Control) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="2"}
+DateTime                rollershutterGroup_OpenWeekend  "Open Weekend"              <time>      (rollershutterGroup_Control) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="3"}
+DateTime                rollershutterGroup_CloseWeekend "Close Weekend"             <time>      (rollershutterGroup_Control) ["Control", "Timestamp"]   {stateDescription=" "[pattern="%1$tH:%1$tM"],widgetOrder="4"}
 ```
+
+Example item file for with knx channel binding
+```csv
+Group           EG                    "Erdgeschoss"         <groundfloor>             ["Location"]
+Group           EG_KU                 "Küche"               <kitchen>          (EG)   ["Location"]
+Group           EG_WZ                 "Wohnzimmer"          <location>         (EG)   ["Location"]
+Group           EG_EZ                 "Esszimmer"           <location>         (EG)   ["Location"]
+Group           EG_GZ                 "Gästezimmer"         <location>         (EG)   ["Location"]
+Group           EG_BZ                 "Badezimmer"          <location>         (EG)   ["Location"]
+Group           EG_SZ                 "Schlafzimmer"        <location>         (EG)   ["Location"]
+
+Group           rollershutterGroup          "Rolladen Badezimmer"        <rollershutter>     (EG_BZ)         ["Blinds"]                   {uiSemantics="uiSemantics"[preposition=" im", equipment="Rolladen", location="Badezimmer"]}
+Rollershutter   rollershutterGroup_Control        "Control"                    <rollershutter>     (EG_BZ_RS)      ["Control" ,"Opening"]       {uiSemantics="uiSemantics"[preposition=" im", equipment="Rolladen", location="Badezimmer"], channel="knx:device:bridge:generic:EG_BZ_RS"}
+Switch          rollershutterGroup_TimeControl    "Zeitplan"                   <time>              (EG_BZ_RS)      ["Control", "Timestamp"]
+DateTime        rollershutterGroup_OpenWeek       "Öffnen Wochentags"          <time>              (EG_BZ_RS)      ["Control", "Timestamp"]     {stateDescription=" "[pattern="%1$tH:%1$tM"], widget="widget:semanticHomeMenu_Simple24hTimepicker", listWidget="widget:semanticHomeMenu_Simple24hTimepicker"}
+DateTime        rollershutterGroup_CloseWeek      "Schließen Wochentags"       <time>              (EG_BZ_RS)      ["Control", "Timestamp"]     {stateDescription=" "[pattern="%1$tH:%1$tM"], widget="widget:semanticHomeMenu_Simple24hTimepicker", listWidget="widget:semanticHomeMenu_Simple24hTimepicker"}
+DateTime        rollershutterGroup_OpenWeekend    "Öffnen Wochenende"          <time>              (EG_BZ_RS)      ["Control", "Timestamp"]     {stateDescription=" "[pattern="%1$tH:%1$tM"], widget="widget:semanticHomeMenu_Simple24hTimepicker", listWidget="widget:semanticHomeMenu_Simple24hTimepicker"}
+DateTime        rollershutterGroup_CloseWeekend   "Schließen Wochenende"       <time>              (EG_BZ_RS)      ["Control", "Timestamp"]     {stateDescription=" "[pattern="%1$tH:%1$tM"], widget="widget:semanticHomeMenu_Simple24hTimepicker", listWidget="widget:semanticHomeMenu_Simple24hTimepicker"}
+```
+
+
 You will then need to add initial states to the 4 items via API-Explorer.
 
   - Create 4 rules for opening and closing the rollershutter [optional]
-    -  When : it is a date and time specified in an item -> choose item "rollerOpenChildWeek"
-    -  Then : Send command up to rollershutterChild item
+    -  When : it is a date and time specified in an item -> choose item "rollershutterGroup_OpenWeek"
+    -  Then : Send command up to rollershutterGroup_Control item
     -  But only if
       - Ephemeris : it is a weekday
-      - If rollerChildTimeControl = ON
+      - If rollershutterGroup_TimeControl = ON
       - If Rollershutter state != 0
 
 Codepage for the rule:
@@ -52,7 +73,7 @@ configuration: {}
 triggers:
   - id: "1"
     configuration:
-      itemName: rollerOpenChildWeek
+      itemName: rollershutterGroup_OpenWeek
       timeOnly: true
     type: timer.DateTimeTrigger
 conditions:
@@ -64,14 +85,14 @@ conditions:
   - inputs: {}
     id: "4"
     configuration:
-      itemName: rollerChildTimeControl
+      itemName: rollershutterGroup_TimeControl
       state: ON
       operator: =
     type: core.ItemStateCondition
   - inputs: {}
     id: "5"
     configuration:
-      itemName: rollershutterChild
+      itemName: rollershutterGroup_Control
       state: "0"
       operator: "!="
     type: core.ItemStateCondition
@@ -80,10 +101,125 @@ actions:
     id: "2"
     configuration:
       command: UP
-      itemName: rollershutterChild
+      itemName: rollershutterGroup_Control
     type: core.ItemCommandAction
 ```
 Repeat this for all 4 times to control.
+
+Cosing rule for workdays:
+```csv
+configuration: {}
+triggers:
+  - id: "1"
+    configuration:
+      itemName: rollershutterGroup_CloseWeek
+      timeOnly: true
+    type: timer.DateTimeTrigger
+conditions:
+  - inputs: {}
+    id: "3"
+    configuration:
+      offset: 0
+    type: ephemeris.WeekdayCondition
+  - inputs: {}
+    id: "4"
+    configuration:
+      itemName: rollershutterGroup_TimeControl
+      state: ON
+      operator: =
+    type: core.ItemStateCondition
+  - inputs: {}
+    id: "5"
+    configuration:
+      itemName: rollershutterGroup_Control
+      state: "100"
+      operator: <=
+    type: core.ItemStateCondition
+actions:
+  - inputs: {}
+    id: "2"
+    configuration:
+      command: DOWN
+      itemName: rollershutterGroup_Control
+    type: core.ItemCommandAction
+```
+
+Opening rule for weekends:
+```csv
+configuration: {}
+triggers:
+  - id: "1"
+    configuration:
+      itemName: rollershutterGroup_OpenWeekend
+      timeOnly: true
+    type: timer.DateTimeTrigger
+conditions:
+  - inputs: {}
+    id: "3"
+    configuration:
+      offset: 0
+    type: ephemeris.WeekendCondition
+  - inputs: {}
+    id: "4"
+    configuration:
+      itemName: rollershutterGroup_TimeControl
+      state: ON
+      operator: =
+    type: core.ItemStateCondition
+  - inputs: {}
+    id: "5"
+    configuration:
+      itemName: rollershutterGroup_Control
+      state: "0"
+      operator: "!="
+    type: core.ItemStateCondition
+actions:
+  - inputs: {}
+    id: "2"
+    configuration:
+      command: UP
+      itemName: rollershutterGroup_Control
+    type: core.ItemCommandAction
+```
+
+Closing rule for weekends:
+```csv
+configuration: {}
+triggers:
+  - id: "1"
+    configuration:
+      itemName: rollershutterGroup_CloseWeekend
+      timeOnly: true
+    type: timer.DateTimeTrigger
+conditions:
+  - inputs: {}
+    id: "3"
+    configuration:
+      offset: 0
+    type: ephemeris.WeekendCondition
+  - inputs: {}
+    id: "4"
+    configuration:
+      itemName: rollershutterGroup_TimeControl
+      state: ON
+      operator: =
+    type: core.ItemStateCondition
+  - inputs: {}
+    id: "5"
+    configuration:
+      itemName: rollershutterGroup_Control
+      state: "100"
+      operator: <=
+    type: core.ItemStateCondition
+actions:
+  - inputs: {}
+    id: "2"
+    configuration:
+      command: DOWN
+      itemName: rollershutterGroup_Control
+    type: core.ItemCommandAction
+```
+
 
 ## Screenshots
 

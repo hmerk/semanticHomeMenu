@@ -1,0 +1,143 @@
+uid: semanticHomeMenu_Simple24hTimepicker
+tags: []
+props:
+  parameters:
+    - context: item
+      description: Item to control
+      label: Item
+      name: item
+      required: false
+      type: TEXT
+  parameterGroups: []
+timestamp: Mar 13, 2024, 6:15:26 PM
+component: f7-block
+config:
+  label: simple 24h Time picker
+slots:
+  default:
+    - component: f7-row
+      config:
+        class:
+          - margin
+      slots:
+        default:
+          - component: f7-col
+            config:
+              width: "100"
+            slots:
+              default:
+                - component: f7-row
+                  config: {}
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            text-align: center
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: "=(((items[props.item].state === 'NULL') || !props.item) ? dayjs().set('second', 0) : dayjs(items[props.item].state).add(1, 'hour')).format('YYYY-MM-DDTHH:mm:ss.0ZZ')"
+                                actionItem: =(props.item)
+                                style:
+                                  --f7-button-text-color: var(--f7-text-color)
+                                  font-family: u2400
+                                  font-size: 150%
+                                text: ▲
+                      - component: f7-col
+                        config:
+                          width: "10"
+                      - component: f7-col
+                        config:
+                          style:
+                            text-align: center
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: "=(((items[props.item].state === 'NULL') || !props.item) ? dayjs().set('second', 0) : dayjs(items[props.item].state).add(1, 'minute')).format('YYYY-MM-DDTHH:mm:ss.0ZZ')"
+                                actionItem: =(props.item)
+                                style:
+                                  --f7-button-text-color: var(--f7-text-color)
+                                  font-family: u2400
+                                  font-size: 150%
+                                text: ▲
+                - component: f7-row
+                  config: {}
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-label-card
+                              config:
+                                label: "=(((items[props.item].state === 'NULL') || !props.item) ? '-': dayjs(items[props.item].state).format('HH'))"
+                      - component: f7-col
+                        config:
+                          style:
+                            margin: auto
+                            text-align: center
+                          width: "10"
+                        slots:
+                          default:
+                            - component: Label
+                              config:
+                                style:
+                                  font-size: 200%
+                                text: ":"
+                      - component: f7-col
+                        config:
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-label-card
+                              config:
+                                label: "=(((items[props.item].state === 'NULL') || !props.item) ? '-': dayjs(items[props.item].state).format('mm'))"
+                - component: f7-row
+                  config: {}
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            text-align: center
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: "=(((items[props.item].state === 'NULL') || !props.item) ? dayjs().set('second', 0) : dayjs(items[props.item].state).add(-1, 'hour')).format('YYYY-MM-DDTHH:mm:ss.0ZZ')"
+                                actionItem: =(props.item)
+                                style:
+                                  --f7-button-text-color: var(--f7-text-color)
+                                  font-family: u2400
+                                  font-size: 150%
+                                text: ▼
+                      - component: f7-col
+                        config:
+                          width: "10"
+                      - component: f7-col
+                        config:
+                          style:
+                            text-align: center
+                          width: "45"
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: command
+                                actionCommand: "=(((items[props.item].state === 'NULL') || !props.item) ? dayjs().set('second', 0) : dayjs(items[props.item].state).add(-1, 'minute').set('second', 0)).format('YYYY-MM-DDTHH:mm:ss.0ZZ')"
+                                actionItem: =(props.item)
+                                style:
+                                  --f7-button-text-color: var(--f7-text-color)
+                                  font-family: u2400
+                                  font-size: 150%
+                                text: ▼

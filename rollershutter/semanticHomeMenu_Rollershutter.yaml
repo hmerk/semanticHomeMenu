@@ -579,10 +579,9 @@ slots:
                                       closeOnEscape: true
                                     slots:
                                       default:
-                                        - component: widget:timepicker
+                                        - component: widget:semanticHomeMenu_Simple24hTimepicker
                                           config:
                                             item: =props.groupItem + loop.i.item
-                                            timeFormat: 24h
                       - component: f7-col
                         slots:
                           default:
