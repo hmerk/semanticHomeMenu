@@ -1,0 +1,908 @@
+uid: main_widget_Dev_Prefix_Accordion
+tags:
+  - improvements Nico_R
+props:
+  parameters:
+    - default: Somewhere
+      description: Name for your weather location
+      label: Weather Location
+      name: locationTitle
+      required: false
+      type: TEXT
+    - default: "1234"
+      description: referencePIN
+      label: referencePIN
+      name: referencePIN
+      required: false
+      type: TEXT
+    - context: item
+      description: securityGroup
+      label: securityGroup
+      name: securityGroup
+      required: false
+      type: TEXT
+    - context: item
+      description: securityMode
+      label: securityMode
+      name: securityMode
+      required: false
+      type: TEXT
+    - context: item
+      description: Name of scenes group item
+      label: Scenes Group
+      name: scenesGroup
+      required: false
+      type: TEXT
+    - description: Hide Security menu
+      label: hide
+      name: hideSecurity
+      required: false
+      type: BOOLEAN
+      groupName: security
+  parameterGroups:
+    - name: security
+      label: Security Configuration Parameters
+timestamp: Mar 27, 2023, 11:34:08 PM
+component: f7-block
+config:
+  style:
+    background: =(themeOptions.dark=="light") ? ("white"):("black")
+    height: 100vh
+    margin: 0
+    padding: 0
+    width: 100%
+  stylesheet: >
+    @import 'http://192.168.178.13:8080/static/customStylesheets/mainWidget.css';
+
+        .custom-accordion {
+
+    padding-left: 0;
+
+    padding-right: 0;
+
+    }
+
+
+    .custom-accordion .accordion-item-toggle {
+      padding: 0px 15px;
+      height: 44px;
+      line-height: 44px;
+      font-size: 17px;
+      color: #000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+
+    .custom-accordion .accordion-item-toggle:active {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+
+    .custom-accordion .accordion-item-toggle span {
+      display: inline-block;
+      margin-left: 15px;
+    }
+
+
+    .custom-accordion .accordion-item:last-child .accordion-item-toggle {
+      border-bottom: none;
+    }
+
+
+    .custom-accordion .icon-plus,
+
+    .custom-accordion .icon-minus {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 1px solid #000;
+      border-radius: 100%;
+      line-height: 20px;
+      text-align: center;
+    }
+
+
+    .custom-accordion .icon-minus {
+      display: none;
+    }
+
+
+    .custom-accordion .accordion-item-opened .icon-minus {
+      display: inline-block;
+    }
+
+
+    .custom-accordion .accordion-item-opened .icon-plus {
+      display: none;
+    }
+
+
+    .custom-accordion .accordion-item-content {
+      padding: 0px 0px;
+    }
+slots:
+  default:
+    - component: f7-block
+      config:
+        class:
+          - container
+          - mainWidget
+      slots:
+        default:
+          - component: f7-block
+            config:
+              class:
+                - no-padding
+                - header
+                - topNavbar
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    style:
+                      height: auto
+                      justify-content: center
+                      margin-left: 2%
+                      margin-right: 2%
+                  slots:
+                    default:
+                      - component: oh-button
+                        config:
+                          large: true
+                          style:
+                            font-size: 24px
+                            width: auto
+                          tabLink: "#home"
+                          tabLinkActive: true
+                          text: Home
+                      - component: oh-button
+                        config:
+                          large: true
+                          style:
+                            font-size: 24px
+                            width: auto
+                          tabLink: "#equipments"
+                          text: Equipments
+                      - component: oh-button
+                        config:
+                          large: true
+                          style:
+                            font-size: 24px
+                            width: auto
+                          tabLink: "#rooms"
+                          text: Rooms
+          - component: f7-block
+            config:
+              class:
+                - main
+                - no-margin
+                - no-padding
+            slots:
+              default:
+                - component: f7-tabs
+                  config:
+                    id: tabs
+                  slots:
+                    default:
+                      - component: f7-tab
+                        config:
+                          id: home
+                          tabActive: true
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - home
+                              slots:
+                                default:
+                                  - component: widget:main_widget_Home_Card_GH
+                                    config:
+                                      locationTitle: =props.locationTitle
+                                      referencePIN: =props.referencePIN
+                                      scenesGroup: =props.scenesGroup
+                                      securityGroup: =props.securityGroup
+                                      securityMode: =props.securityMode
+                      - component: f7-tab
+                        config:
+                          id: equipments
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - equipments
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      for: equipmentTypes
+                                      fragment: true
+                                      in:
+                                        - label: Lights
+                                          type: Lightbulb
+                                        - label: Rollers
+                                          type: Blinds
+                                        - label: Heating
+                                          type: RadiatorControl
+                                        - label: HVAC
+                                          type: HVAC
+                                        - label: Appliances
+                                          type: test-
+                                      sourceType: array
+                                    slots:
+                                      default:
+                                        - component: f7-block
+                                          config:
+                                            accordion-list: true
+                                            class:
+                                              - custom-accordion
+                                          slots:
+                                            default:
+                                              - component: f7-accordion-item
+                                                config: {}
+                                                slots:
+                                                  default:
+                                                    - component: f7-accordion-toggle
+                                                      slots:
+                                                        default:
+                                                          - component: f7-row
+                                                            config:
+                                                              class:
+                                                                - justify-content-left
+                                                                - display-flex
+                                                              style:
+                                                                heigth: auto
+                                                                width: 100%
+                                                            slots:
+                                                              default:
+                                                                - component: f7-col
+                                                                  slots:
+                                                                    default:
+                                                                      - component: Label
+                                                                        config:
+                                                                          text: =loop.equipmentTypes.label
+                                                                - component: f7-col
+                                                                  config: {}
+                                                                  slots:
+                                                                    default:
+                                                                      - component: Label
+                                                                        config:
+                                                                          class:
+                                                                            - icon
+                                                                            - icon-plus
+                                                                          text: +
+                                                                      - component: Label
+                                                                        config:
+                                                                          class:
+                                                                            - icon
+                                                                            - icon-minus
+                                                                          text: "-"
+                                                    - component: oh-repeater
+                                                      config:
+                                                        fetchMetadata: semantics
+                                                        filter: loop.equipments.tags.includes(loop.equipmentTypes.type)
+                                                        for: equipments
+                                                        fragment: true
+                                                        itemTags: ","
+                                                        sourceType: itemsWithTags
+                                                      slots:
+                                                        default:
+                                                          - component: f7-accordion-content
+                                                            slots:
+                                                              default:
+                                                                - component: f7-row
+                                                                  config:
+                                                                    class:
+                                                                      - justify-content-center
+                                                                  slots:
+                                                                    default:
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.lightItem.tags.includes("Lightbulb"))
+                                                                          for: lightItem
+                                                                          fragment: true
+                                                                          in: =loop.equipments_source
+                                                                          sourceType: array
+                                                                          visible: =(loop.equipments_idx == 0)
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_Lights
+                                                                                    config:
+                                                                                      groupItem: =loop.lightItem.name
+                                                                                      groupItemLabel: =loop.lightItem.label
+                                                                                      title: "=loop.lightItem.metadata.uiSemantics ? loop.lightItem.metadata.uiSemantics.config.equipment + loop.lightItem.metadata.uiSemantics.config.preposition + loop.lightItem.metadata.uiSemantics.config.location : loop.lightItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.lightItem.tags.includes("Lightbulb") && loop.lightItem.tags.includes("Color"))
+                                                                          for: lightItem
+                                                                          fragment: true
+                                                                          in: =loop.equipments_source
+                                                                          sourceType: array
+                                                                          visible: =(loop.equipments_idx == 0)
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:main_widget_Light_Card_Color_Dev_Prefix
+                                                                                    config:
+                                                                                      groupItem: =loop.lightItem.name
+                                                                                      groupItemLabel: =loop.lightItem.label
+                                                                                      title: "=loop.lightItem.metadata.uiSemantics ? loop.lightItem.metadata.uiSemantics.config.equipment + loop.lightItem.metadata.uiSemantics.config.preposition + loop.lightItem.metadata.uiSemantics.config.location : loop.lightItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.blindItem.tags.includes("Blinds"))
+                                                                          for: blindItem
+                                                                          fragment: true
+                                                                          in: =loop.equipments_source
+                                                                          sourceType: array
+                                                                          visible: =(loop.equipments_idx == 0)
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_Rollershutters
+                                                                                    config:
+                                                                                      groupItem: =loop.blindItem.name
+                                                                                      groupItemLabel: =loop.blindItem.label
+                                                                                      title: "=loop.blindItem.metadata.uiSemantics ? loop.blindItem.metadata.uiSemantics.config.equipment + loop.blindItem.metadata.uiSemantics.config.preposition + loop.blindItem.metadata.uiSemantics.config.location : loop.blindItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.radiatorItem.tags.includes("RadiatorControl"))
+                                                                          for: radiatorItem
+                                                                          fragment: true
+                                                                          in: =loop.equipments_source
+                                                                          sourceType: array
+                                                                          visible: =(loop.equipments_idx == 0)
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_RadiatorControl
+                                                                                    config:
+                                                                                      groupItem: =loop.radiatorItem.name
+                                                                                      groupItemLabel: =loop.radiatorItem.label
+                                                                                      title: "=loop.radiatorItem.metadata.uiSemantics ? loop.radiatorItem.metadata.uiSemantics.config.equipment + loop.radiatorItem.metadata.uiSemantics.config.preposition + loop.radiatorItem.metadata.uiSemantics.config.location : loop.radiatorItem.label"
+                      - component: f7-tab
+                        config:
+                          id: rooms
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - rooms
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      fetchMetadata: semantics
+                                      filter: (loop.floors.metadata) && (loop.floors.metadata.semantics.value).includes("Floor")
+                                      for: floors
+                                      fragment: true
+                                      itemTags: ","
+                                      sourceType: itemsWithTags
+                                    slots:
+                                      default:
+                                        - component: oh-repeater
+                                          config:
+                                            fetchMetadata: semantics,widgetOrder
+                                            filter: (loop.rooms.metadata) && ((loop.rooms.metadata.semantics.value).includes("Room")  || (loop.rooms.metadata.semantics.value).includes("Corridor"))
+                                            for: rooms
+                                            fragment: true
+                                            groupItem: =loop.floors.name
+                                            sourceType: itemsInGroup
+                                          slots:
+                                            default:
+                                              - component: f7-block
+                                                config:
+                                                  accordion-list: true
+                                                  class:
+                                                    - custom-accordion
+                                                slots:
+                                                  default:
+                                                    - component: f7-accordion-item
+                                                      config: {}
+                                                      slots:
+                                                        default:
+                                                          - component: f7-accordion-toggle
+                                                            slots:
+                                                              default:
+                                                                - component: f7-row
+                                                                  config:
+                                                                    class:
+                                                                      - justify-content-left
+                                                                      - display-flex
+                                                                  slots:
+                                                                    default:
+                                                                      - component: f7-col
+                                                                        config:
+                                                                          style:
+                                                                            width: 10%
+                                                                        slots:
+                                                                          default:
+                                                                            - component: Label
+                                                                              config:
+                                                                                class:
+                                                                                  - icon
+                                                                                  - icon-plus
+                                                                                text: +
+                                                                            - component: Label
+                                                                              config:
+                                                                                class:
+                                                                                  - icon
+                                                                                  - icon-minus
+                                                                                text: "-"
+                                                                      - component: f7-col
+                                                                        slots:
+                                                                          default:
+                                                                            - component: Label
+                                                                              config:
+                                                                                text: =loop.rooms.label
+                                                          - component: f7-accordion-content
+                                                            slots:
+                                                              default:
+                                                                - component: f7-row
+                                                                  config:
+                                                                    class:
+                                                                      - justify-content-center
+                                                                  slots:
+                                                                    default:
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.lightItem.tags.includes("Lightbulb")
+                                                                          for: lightItem
+                                                                          fragment: true
+                                                                          in: =loop.rooms_source[loop.rooms_idx].members
+                                                                          sourceType: array
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_Lights
+                                                                                    config:
+                                                                                      groupItem: =loop.lightItem.name
+                                                                                      groupItemLabel: =loop.lightItem.label
+                                                                                      groupItemLocation: =loop.rooms.label
+                                                                                      title: "=loop.lightItem.metadata.uiSemantics ? loop.lightItem.metadata.uiSemantics.config.equipment + loop.lightItem.metadata.uiSemantics.config.preposition + loop.lightItem.metadata.uiSemantics.config.location : loop.lightItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.lightItem.tags.includes("Lightbulb") && loop.lightItem.tags.includes("Color"))
+                                                                          for: lightItem
+                                                                          fragment: true
+                                                                          in: =loop.rooms_source[loop.rooms_idx].members
+                                                                          sourceType: array
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:main_widget_Light_Card_Color_Dev_Prefix
+                                                                                    config:
+                                                                                      groupItem: =loop.lightItem.name
+                                                                                      groupItemLabel: =loop.lightItem.label
+                                                                                      groupItemLocation: =loop.rooms.label
+                                                                                      title: "=loop.lightItem.metadata.uiSemantics ? loop.lightItem.metadata.uiSemantics.config.equipment + loop.lightItem.metadata.uiSemantics.config.preposition + loop.lightItem.metadata.uiSemantics.config.location : loop.lightItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.radiatorItem.tags.includes("RadiatorControl"))
+                                                                          for: radiatorItem
+                                                                          fragment: true
+                                                                          in: =loop.rooms_source[loop.rooms_idx].members
+                                                                          sourceType: array
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_RadiatorControl
+                                                                                    config:
+                                                                                      groupItem: =loop.radiatorItem.name
+                                                                                      groupItemLabel: =loop.radiatorItem.label
+                                                                                      groupItemLocation: =loop.rooms.label
+                                                                                      title: "=loop.radiatorItem.metadata.uiSemantics ? loop.radiatorItem.metadata.uiSemantics.config.equipment + loop.radiatorItem.metadata.uiSemantics.config.preposition + loop.radiatorItem.metadata.uiSemantics.config.location : loop.radiatorItem.label"
+                                                                      - component: oh-repeater
+                                                                        config:
+                                                                          filter: (loop.blindItem.tags.includes("Blinds"))
+                                                                          for: blindItem
+                                                                          fragment: true
+                                                                          in: =loop.rooms_source[loop.rooms_idx].members
+                                                                          sourceType: array
+                                                                        slots:
+                                                                          default:
+                                                                            - component: f7-col
+                                                                              config:
+                                                                                large: 50
+                                                                                medium: 50
+                                                                                small: 90
+                                                                                style:
+                                                                                  overflow: hidden
+                                                                                width: 100
+                                                                                xlarge: 33
+                                                                                xsmall: 100
+                                                                              slots:
+                                                                                default:
+                                                                                  - component: widget:semanticWidget_Rollershutters
+                                                                                    config:
+                                                                                      groupItem: =loop.blindItem.name
+                                                                                      groupItemLabel: =loop.blindItem.label
+                                                                                      groupItemLocation: =loop.rooms.label
+                                                                                      title: "=loop.blindItem.metadata.uiSemantics ? loop.blindItem.metadata.uiSemantics.config.equipment + loop.blindItem.metadata.uiSemantics.config.preposition + loop.blindItem.metadata.uiSemantics.config.location : loop.blindItem.label"
+          - component: f7-block
+            config:
+              class:
+                - no-margin
+                - no-padding
+                - footer
+              style:
+                display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION0") ? "" : "none !important" : "none !important"'
+                width: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      flex-direction: row
+                      height: 100%
+                      justify-content: space-around
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.selectThingNew.thing == "Security" ? undefined : "Security"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Security" ? "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:carbon:security
+                                  - component: Label
+                                    config:
+                                      text: Security
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.selectThingNew.thing == "Scenes" ? undefined : "Scenes"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Scenes" ? "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:heroicons:rectangle-stack
+                                  - component: Label
+                                    config:
+                                      text: Scenes
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.selectThingNew.thing == "Appliances" ? undefined : "Appliances"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Appliances" ?  "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:bi:plugin
+                                  - component: Label
+                                    config:
+                                      text: Appliances
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.selectThingNew.thing == "Energy" ? undefined : "Energy"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Energy" ?  "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:simple-line-icons:energy
+                                  - component: Label
+                                    config:
+                                      text: Energy
+          - component: f7-block
+            config:
+              class:
+                - no-margin
+                - no-padding
+                - footer
+              style:
+                display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION0") ? "none !important" : "" : "none !important"'
+                width: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      flex-direction: row
+                      height: 70px
+                      justify-content: space-around
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 100%
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: selectThingNew
+                                actionVariableValue:
+                                  thing: '=vars.selectThingNew.thing == "Lights" ? undefined : "Lights"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Lights" ? "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                                  justify-content: center
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:clarity:lightbulb-line
+                                    slots: {}
+                                  - component: f7-badge
+                                    config:
+                                      style:
+                                        --f7-badge-font-size: var(--f7-badge-in-icon-font-size)
+                                        --f7-badge-size: var(--f7-badge-in-icon-size)
+                                        background-color: '=items["gAllLightsOn"].state >= 1 ? "var(--f7-theme-color)" : ""'
+                                        font-family: var(--f7-font-family)
+                                        font-weight: bold
+                                        left: 50%
+                                        position: absolute
+                                        top: 0
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            text: =items["gAllLightsOn"].state
+                                  - component: Label
+                                    config:
+                                      text: Lights
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 100%
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: selectThingNew
+                                actionVariableValue:
+                                  thing: '=vars.selectThingNew.thing == "Rollers" ? undefined : "Rollers"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Rollers" ? "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                                  justify-content: center
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:mdi:window-shutter
+                                  - component: Label
+                                    config:
+                                      text: Rollers
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 100%
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: selectThingNew
+                                actionVariableValue:
+                                  thing: '=vars.selectThingNew.thing == "Climate" ? undefined : "Climate"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Climate" ?  "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                                  justify-content: center
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:ph:thermometer-hot-light
+                                  - component: Label
+                                    config:
+                                      text: Climate
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 100%
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: selectThingNew
+                                actionVariableValue:
+                                  thing: '=vars.selectThingNew.thing == "Appliances" ? undefined : "Appliances"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.selectThingNew.thing == "Appliances" ?  "var(--f7-toggle-active-color)" : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                                  justify-content: center
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:bi:plugin
+                                  - component: Label
+                                    config:
+                                      text: Appliances
