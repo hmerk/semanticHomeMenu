@@ -654,8 +654,7 @@ slots:
                       - component: widget:semanticHomeMenu_Scenes
                         config:
                           colorScheme: var(--my-text-colorScheme)
-                          sceneName: =loop.scene.name
-                          sceneUID: =loop.scene.UID
+                          sceneJSON: =loop.scene
                           visible: '=vars.objVar ? ((vars.objVar.selectSection + vars.objVar.selectThing)=="SECTION0Scenes") ? true : false : false'
                 - component: widget:semanticHomeMenu_Appliances
                   config:
