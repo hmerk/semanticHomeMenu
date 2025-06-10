@@ -12,6 +12,18 @@ This widget card will show the members of your configured security groups and th
 - securityMode
   The securityMode item is of type string item which can have the following states (strings): disarmed, armed-away and armed-home. The state will colorize the icons like shown below [inactive - gray, active green or red]
 
+```csv
+String                        semanticHomeMenu_armedHome                    "Your translation of 'ARMED HOME'"
+String                        semanticHomeMenu_disarmed                     "Your translation of 'DISARMED'"
+String                        semanticHomeMenu_armedAway                    "Your translation of 'ARMED AWAY'"
+String                        semanticHomeMenu_smokeDetectors               "Your translation of 'Smoke Detectors'"
+String                        semanticHomeMenu_motionDetectors              "Your translation of 'Motion Detectors'"
+String                        semanticHomeMenu_surveillance                 "Your translation of 'Surveillance'"
+String                        semanticHomeMenu_blinds                       "Your translation of 'Blinds'"
+String                        semanticHomeMenu_doors                        "Your translation of 'Doors'"
+String                        semanticHomeMenu_windows                      "Your translation of 'Windows'"
+```
+
 ## Changelog
 ### Version 0.2
 ### Version 0.1

@@ -8,6 +8,7 @@ This Weather Widget was inspired by the iOS Weather Widget.
 No additional configuration is needed. Just create the following Items and change the channels according to your needs.
 Please note, the temperature bars mostly appear after a menu change only. We have to figure out why.
 ```csv
+String                        semanticHomeMenu_municipality                 "The name of your municipality"
 Group                       owmWeather                                                      "Weather Data"                        <climate>                                                                   ["WeatherService"]
 Group:Number:Temperature:MIN  minTempForecastDays                                           "Minimum forecasted temperature for next 6 days"                  
 Group:Number:Temperature:MAX  maxTempForecastDays                                           "Maximum forecasted temperature for next 6 days"                  

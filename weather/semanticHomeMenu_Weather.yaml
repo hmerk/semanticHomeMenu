@@ -43,7 +43,7 @@ slots:
                         config:
                           style:
                             font-size: 16px
-                          text: =items.Localweatherandforecast_StationName.state
+                          text: '=items.Localweatherandforecast_StationName.state != "NULL" ? items.Localweatherandforecast_StationName.state : items.semanticHomeMenu_municipality.state'
                 - component: f7-row
                   config:
                     class:

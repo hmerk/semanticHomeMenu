@@ -32,8 +32,8 @@ slots:
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
-                    subtitle: =(items.gBatteryLowTotal.state.split('.')[0]) + " batterie(s) need(s) attention"
-                    title: Batteries
+                    subtitle: =(items.gBatteryLowTotal.state.split('.')[0]) + items.semanticHomeMenu_batteryAttention.state
+                    title: =items.semanticHomeMenu_batteries.state
                   slots:
                     accordion:
                       - component: f7-list

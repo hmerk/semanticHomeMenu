@@ -59,7 +59,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: ARMED HOME
+                          text: =items.semanticHomeMenu_armedHome.state
                 - component: f7-col
                   config:
                     style:
@@ -89,7 +89,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: DISARMED
+                          text: =items.semanticHomeMenu_disarmed.state
                 - component: f7-col
                   config:
                     style:
@@ -119,7 +119,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: ARMED AWAY
+                          text: =items.semanticHomeMenu_armedAway.state
           - component: f7-list
             config:
               accordionList: true
@@ -134,7 +134,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Smoke Detectors
+                    title: =items.semanticHomeMenu_smokeDetectors.state
                   slots:
                     accordion:
                       - component: f7-list
@@ -176,7 +176,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Motion Detectors
+                    title: =items.semanticHomeMenu_motionDetectors.state
                   slots:
                     accordion:
                       - component: f7-list
@@ -219,7 +219,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Surveillance
+                    title: =items.semanticHomeMenu_surveillance.state
                   slots:
                     accordion:
                       - component: f7-list
@@ -262,7 +262,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Blinds
+                    title: =items.semanticHomeMenu_blinds.state
                   slots:
                     accordion:
                       - component: f7-list
@@ -305,7 +305,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Doors
+                    title: =items.semanticHomeMenu_doors.state
                   slots:
                     accordion:
                       - component: f7-list
@@ -347,7 +347,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Windows
+                    title: =items.semanticHomeMenu_windows.state
                   slots:
                     accordion:
                       - component: f7-list

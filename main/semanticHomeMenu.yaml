@@ -154,9 +154,9 @@ slots:
                           for: baseMenu
                           fragment: true
                           in:
-                            - name: Home
-                            - name: Floors
-                            - name: Rooms
+                            - name: =items.semanticHomeMenu_home.state
+                            - name: =items.semanticHomeMenu_floors.state
+                            - name: =items.semanticHomeMenu_rooms.state
                           sourceType: array
                         slots:
                           default:
@@ -993,7 +993,7 @@ slots:
                                             text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state) + Number(items.gSmokeAlarm.state) + Number(items.gMotionDetected.state))
                                   - component: Label
                                     config:
-                                      text: Security
+                                      text: =items.semanticHomeMenu_security.state
                       - component: f7-col
                         config:
                           style:
@@ -1025,7 +1025,7 @@ slots:
                                       icon: iconify:heroicons:rectangle-stack
                                   - component: Label
                                     config:
-                                      text: Scenes
+                                      text: =items.semanticHomeMenu_scenes.state
                       - component: f7-col
                         config:
                           style:
@@ -1057,7 +1057,7 @@ slots:
                                       icon: iconify:bi:plugin
                                   - component: Label
                                     config:
-                                      text: Appliances
+                                      text: =items.semanticHomeMenu_appliances.state
                       - component: f7-col
                         config:
                           style:
@@ -1104,7 +1104,7 @@ slots:
                                             text: =(Number(items.gBatteryLowTotal.state))
                                   - component: Label
                                     config:
-                                      text: Energy
+                                      text: =items.semanticHomeMenu_energy.state
                       - component: f7-col
                         config:
                           style:
@@ -1136,7 +1136,7 @@ slots:
                                       icon: iconify:simple-line-icons:info
                                   - component: Label
                                     config:
-                                      text: System
+                                      text: =items.semanticHomeMenu_system.state
           - component: f7-block
             config:
               class:
@@ -1189,7 +1189,7 @@ slots:
                                       icon: iconify:clarity:lightbulb-line
                                   - component: Label
                                     config:
-                                      text: Lights
+                                      text: =items.semanticHomeMenu_lights.state
                       - component: f7-col
                         config:
                           style:
@@ -1221,7 +1221,7 @@ slots:
                                       icon: iconify:mdi:window-shutter
                                   - component: Label
                                     config:
-                                      text: Rollers
+                                      text: =items.semanticHomeMenu_rollers.state
                       - component: f7-col
                         config:
                           style:
@@ -1253,7 +1253,7 @@ slots:
                                       icon: iconify:ph:thermometer-hot-light
                                   - component: Label
                                     config:
-                                      text: Climate
+                                      text: =items.semanticHomeMenu_climate.state
                       - component: f7-col
                         config:
                           style:
@@ -1285,4 +1285,4 @@ slots:
                                       icon: iconify:bi:plugin
                                   - component: Label
                                     config:
-                                      text: Appliances
+                                      text: =items.semanticHomeMenu_appliances.state

@@ -94,8 +94,19 @@ Group:Number:COUNT(ON)        gBatteryLow                                   "Emp
 Group:Number:COUNT(OPEN)      gWindowsOpen                                  "Windows Open"                                         
 Group:Number:COUNT(OPEN)      gDoorsOpen                                    "Doors Open"                                           
 Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"                                      
+String                        semanticHomeMenu_home                         "Your translation of 'Home'"
+String                        semanticHomeMenu_floors                       "Your translation of 'Floors'"
+String                        semanticHomeMenu_rooms                        "Your translation of 'Rooms'"
+String                        semanticHomeMenu_security                     "Your translation of 'Security'"
+String                        semanticHomeMenu_scenes                       "Your translation of 'Scenes'"
+String                        semanticHomeMenu_appliances                   "Your translation of 'Appliances'"
+String                        semanticHomeMenu_energy                       "Your translation of 'Energy'"
+String                        semanticHomeMenu_system                       "Your translation of 'System'"
+String                        semanticHomeMenu_lights                       "Your translation of 'Lights'"
+String                        semanticHomeMenu_rollers                      "Your translation of 'Rollers'"
+String                        semanticHomeMenu_climate                      "Your translation of 'Climate'"
 ```
-These items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar.
+These items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar. Don't forget to set the string items to their correct value e.g. using the openhab console (with command `openhab:update semanticHomeMenu_home Home`).
 
 ## Community
 Please check [openHAB community]for discussions and proposals.
