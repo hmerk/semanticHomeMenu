@@ -3,14 +3,9 @@ tags: []
 props:
   parameters:
     - context: Text
-      label: UID of the scene to run
-      name: sceneUID
-      required: true
-      type: TEXT
-    - context: Text
       default: WakeUp
-      label: Name (description) of the scene to run
-      name: sceneName
+      label: JSON object of the scene to run
+      name: sceneJSON
       required: true
       type: TEXT
     - context: Text
@@ -73,7 +68,7 @@ slots:
                           style:
                             font-size: 16px
                             font-weight: bold
-                          text: '=props.sceneName ? props.sceneName : "TBD"'
+                          text: '=props.sceneJSON.name ? props.sceneJSON.name : "TBD"'
                 - component: f7-row
                   config:
                     class:
@@ -100,7 +95,7 @@ slots:
                 - component: oh-button
                   config:
                     action: rule
-                    actionRule: =props.sceneUID
+                    actionRule: '=props.sceneJSON.UID ? props.sceneJSON.UID : props.sceneJSON.uid ? props.sceneJSON.uid : "Error: props.sceneJSON.UID nor props.sceneJSON.uid exist"'
                     style:
                       background: =props.colorScheme
                       border-radius: 20px

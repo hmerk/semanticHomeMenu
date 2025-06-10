@@ -128,8 +128,8 @@ slots:
               default:
                 - component: oh-list-item
                   config:
-                    icon: '=items.gSmokeAlarm.state == "0" ? "iconify:material-symbols:detector-smoke" : "iconify:material-symbols:detector-alarm"'
-                    iconColor: '=items.gSmokeAlarm.state == "0" ? "gray" : "red"'
+                    icon: '= (items.gSmokeAlarm.state == "0") ? "iconify:material-symbols:detector-smoke" : (items.gSmokeAlarm.state == "0.0") ? "iconify:material-symbols:detector-smoke" : "iconify:material-symbols:detector-alarm"'
+                    iconColor: '= (items.gSmokeAlarm.state == "0") ? "gray" : (items.gSmokeAlarm.state == "0.0") ? "gray" : "red"'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
@@ -170,8 +170,8 @@ slots:
               default:
                 - component: oh-list-item
                   config:
-                    icon: '=items.gMotionDetected.state == "0" ? "motion-closed" : "motion-open"'
-                    iconColor: '=items.gMotionDetected.state == "0" ? "gray" : "red"'
+                    icon: '= (items.gMotionDetected.state == "0") ? "motion-closed" : (items.gMotionDetected.state == "0.0") ? "motion-closed" : "motion-open"'
+                    iconColor: '= (items.gMotionDetected.state == "0") ? "gray" : (items.gMotionDetected.state == "0.0") ? "gray" : "red"'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
@@ -300,7 +300,7 @@ slots:
                 - component: oh-list-item
                   config:
                     icon: material:sensor_door
-                    iconColor: '=items.gDoorsOpen.state == "0" ? "gray" : "red"'
+                    iconColor: '= (items.gDoorsOpen.state == "0") ? "gray" : (items.gDoorsOpen.state == "0.0") ? "gray" : "red"'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
@@ -342,7 +342,7 @@ slots:
                 - component: oh-list-item
                   config:
                     icon: material:sensor_window
-                    iconColor: '=items.gWindowsOpen.state == "0" ? "gray" : "red"'
+                    iconColor: '= (items.gWindowsOpen.state == "0") ? "gray" : (items.gWindowsOpen.state == "0.0") ? "gray" : "red"'
                     style:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
