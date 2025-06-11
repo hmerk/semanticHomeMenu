@@ -59,7 +59,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: ARMED HOME
+                          text: '= (items.semanticHomeMenu_armedHome.state != "-" && items.semanticHomeMenu_armedHome.state != "NULL") ? items.semanticHomeMenu_armedHome.state : "ARMED HOME"'
                 - component: f7-col
                   config:
                     style:
@@ -89,7 +89,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: DISARMED
+                          text: '= (items.semanticHomeMenu_disarmed.state != "-" && items.semanticHomeMenu_disarmed.state != "NULL") ? items.semanticHomeMenu_disarmed.state : "DISARMED"'
                 - component: f7-col
                   config:
                     style:
@@ -119,7 +119,7 @@ slots:
                             --f7-button-text-color: 'themeOptions.dark=="light" ? white : black'
                             font-size: 14px
                             height: auto
-                          text: ARMED AWAY
+                          text: '= (items.semanticHomeMenu_armedAway.state != "-" && items.semanticHomeMenu_armedAway.state != "NULL") ? items.semanticHomeMenu_armedAway.state : "ARMED AWAY"'
           - component: f7-list
             config:
               accordionList: true
@@ -134,7 +134,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Smoke Detectors
+                    title: '= (items.semanticHomeMenu_smokeDetectors.state != "-" && items.semanticHomeMenu_smokeDetectors.state != "NULL") ? items.semanticHomeMenu_smokeDetectors.state : "Smoke Detectors"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -157,7 +157,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.smokeSensorMember.name].state != "OFF" ? "ALARM" : "OK"'
+                                      after: '=items[loop.smokeSensorMember.name].state != "ON" ? ((items.semanticHomeMenu_noMotion.state != "-" && items.semanticHomeMenu_noMotion.state != "NULL") ? items.semanticHomeMenu_noMotion.state : "NO-Motion") : ((items.semanticHomeMenu_motion.state != "-" && items.semanticHomeMenu_motion.state != "NULL") ? items.semanticHomeMenu_motion.state : "MOTION")'
                                       icon: '=items[loop.smokeSensorMember.name].state != "OFF" ? "iconify:material-symbols:detector-alarm" : "iconify:material-symbols:detector-smoke"'
                                       iconColor: '=items[loop.smokeSensorMember.name].state != "OFF" ? "red" : "gray"'
                                       item: =loop.smokeSensorMember.name
@@ -176,7 +176,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Motion Detectors
+                    title: '= (items.semanticHomeMenu_motionDetectors.state != "-" && items.semanticHomeMenu_motionDetectors.state != "NULL") ? items.semanticHomeMenu_motionDetectors.state : "Motion Detectors"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -200,7 +200,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.motionDetector.name].state != "ON" ? "NO-Motion" : "MOTION"'
+                                      after: '=items[loop.motionDetector.name].state != "ON" ? ((items.semanticHomeMenu_noMotion.state != "-" && items.semanticHomeMenu_noMotion.state != "NULL") ? items.semanticHomeMenu_noMotion.state : "NO-Motion") : ((items.semanticHomeMenu_motion.state != "-" && items.semanticHomeMenu_motion.state != "NULL") ? items.semanticHomeMenu_motion.state : "MOTION")'
                                       icon: '=items[loop.motionDetector.name].state == "ON" ? "motion-open" : "motion-closed"'
                                       iconColor: '=items[loop.motionDetector.name].state != "ON" ? "red" : "gray"'
                                       item: =loop.motionDetector.name
@@ -219,7 +219,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Surveillance
+                    title: '= (items.semanticHomeMenu_surveillance.state != "-" && items.semanticHomeMenu_surveillance.state != "NULL") ? items.semanticHomeMenu_surveillance.state : "Surveillance"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -243,7 +243,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.surveilance.name].state != "ON" ? "OFF" : "ON"'
+                                      after: '=items[loop.surveilance.name].state != "ON" ? ((items.semanticHomeMenu_off.state != "-" && items.semanticHomeMenu_off.state != "NULL") ? items.semanticHomeMenu_off.state : "OFF") : ((items.semanticHomeMenu_on.state != "-" && items.semanticHomeMenu_on.state != "NULL") ? items.semanticHomeMenu_on.state : "ON")'
                                       icon: material:video_camera_front
                                       iconColor: '=items[loop.surveilance.name].state != "ON" ? "gray" : "red"'
                                       item: =loop.surveilance.name
@@ -262,7 +262,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Blinds
+                    title: '= (items.semanticHomeMenu_blinds.state != "-" && items.semanticHomeMenu_blinds.state != "NULL") ? items.semanticHomeMenu_blinds.state : "Blinds"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -286,7 +286,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.shadesMember.name].state != "100" ? "OPEN" : "CLOSED"'
+                                      after: '=items[loop.shadesMember.name].state != "100" ? ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
                                       title: =loop.shadesMember.metadata.uiSemantics.config.location
                                       icon: '=(loop.shadesMember.state == "0") ? "material:roller_shades" : "material:roller_shades"'
                                       iconColor: gray
@@ -305,7 +305,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Doors
+                    title: '= (items.semanticHomeMenu_doors.state != "-" && items.semanticHomeMenu_doors.state != "NULL") ? items.semanticHomeMenu_doors.state : "Doors"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -328,7 +328,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.doorMember.name].state != "CLOSED" ? "OPEN" : "CLOSED"'
+                                      after: '=items[loop.doorMember.name].state != "CLOSED" ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
                                       icon: material:sensor_door
                                       iconColor: '=items[loop.doorMember.name].state != "CLOSED" ? "red" : "gray"'
                                       item: =loop.doorMember.name
@@ -347,7 +347,7 @@ slots:
                       --f7-list-item-after-font-size: 16px
                       --f7-list-item-after-text-color: "=themeOptions.dark === 'dark' ? 'rgb(180,180,180)' : 'rgb(80,80,80)'"
                       margin-top: 30px
-                    title: Windows
+                    title: '= (items.semanticHomeMenu_windows.state != "-" && items.semanticHomeMenu_windows.state != "NULL") ? items.semanticHomeMenu_windows.state : "Windows"'
                   slots:
                     accordion:
                       - component: f7-list
@@ -370,7 +370,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.windowMember.name].state != "CLOSED" ? "OPEN" : "CLOSED"'
+                                      after: '=items[loop.windowMember.name].state != "CLOSED" ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
                                       icon: material:sensor_window
                                       iconColor: '=items[loop.windowMember.name].state != "CLOSED" ? "red" : "gray"'
                                       item: =loop.windowMember.name

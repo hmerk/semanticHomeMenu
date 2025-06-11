@@ -2,7 +2,7 @@
   
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/LowBattery.jpg)
 
-The Eergy widget card used by semanticHomeMenu will by default show information about empty batteries as an accordion list.
+The Energy widget card used by semanticHomeMenu will by default show information about empty batteries as an accordion list.
 
 ![grafik](https://github.com/hmerk/semanticHomeMenu/blob/main/screenshots/LowBatteryExpanded.jpg)
 

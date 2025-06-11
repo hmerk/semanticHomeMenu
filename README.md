@@ -93,9 +93,87 @@ Group:Number:COUNT(ON)        gSmokeAlarm                                   "Smo
 Group:Number:COUNT(ON)        gBatteryLow                                   "Empty Batteries"                <lowbattery>
 Group:Number:COUNT(OPEN)      gWindowsOpen                                  "Windows Open"                                         
 Group:Number:COUNT(OPEN)      gDoorsOpen                                    "Doors Open"                                           
-Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"                                      
+Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"
 ```
-These items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar.
+
+### Translatable strings
+Most of the labels in the widget are retrieved from items, but there are also some default labels, which are in English. If you want to keep them in English, you can leave the state of the string items below as `NULL`; then the default labels will appear. Technically, they will also appear if you don't create these string items, but then your log will see a lot of entries like this:
+```
+22:15:13.036 [WARN ] [se.internal.SseItemStatesEventBuilder] - Attempting to send a state update of an item which doesn't exist: semanticHomeMenu_home
+```
+Add these items:
+```
+Group                         gSemanticHomeMenu_strings                     "Strings for the semanticHomeMenu"
+String                        semanticHomeMenu_home                         "semanticHomeMenu string for 'Home'"                             (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_floors                       "semanticHomeMenu string for 'Floors'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_rooms                        "semanticHomeMenu string for 'Rooms'"                            (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_security                     "semanticHomeMenu string for 'Security'"                         (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_scenes                       "semanticHomeMenu string for 'Scenes'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_appliances                   "semanticHomeMenu string for 'Appliances'"                       (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_energy                       "semanticHomeMenu string for 'Energy'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_system                       "semanticHomeMenu string for 'System'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_lights                       "semanticHomeMenu string for 'Lights'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_rollers                      "semanticHomeMenu string for 'Rollers'"                          (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_climate                      "semanticHomeMenu string for 'Climate'"                          (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_batteryAttention             "semanticHomeMenu string for ' batterie(s) need(s) attention'"   (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_batteries                    "semanticHomeMenu string for 'Batteries'"                        (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_armedHome                    "semanticHomeMenu string for 'ARMED HOME'"                       (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_disarmed                     "semanticHomeMenu string for 'DISARMED'"                         (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_armedAway                    "semanticHomeMenu string for 'ARMED AWAY'"                       (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_smokeDetectors               "semanticHomeMenu string for 'Smoke Detectors'"                  (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_motionDetectors              "semanticHomeMenu string for 'Motion Detectors'"                 (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_surveillance                 "semanticHomeMenu string for 'Surveillance'"                     (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_blinds                       "semanticHomeMenu string for 'Blinds'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_doors                        "semanticHomeMenu string for 'Doors'"                            (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_windows                      "semanticHomeMenu string for 'Windows'"                          (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_noMotion                     "semanticHomeMenu string for 'NO-Motion'"                        (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_motion                       "semanticHomeMenu string for 'MOTION'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_open                         "semanticHomeMenu string for 'OPEN'"                             (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_closed                       "semanticHomeMenu string for 'CLOSED'"                           (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_alarm                        "semanticHomeMenu string for 'ALARM'"                            (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_ok                           "semanticHomeMenu string for 'OK'"                               (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_on                           "semanticHomeMenu string for 'ON'"                               (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_off                          "semanticHomeMenu string for 'OFF'"                              (gSemanticHomeMenu_strings)
+String                        semanticHomeMenu_municipality                 "The name of your municipality"                                  (gSemanticHomeMenu_strings)
+```
+
+If you want to use translated labels, update their state e.g. by running a script like this JavaScript code:
+```js
+var stringarray = [
+  ['semanticHomeMenu_home', 'the string of your choice'],
+  ['semanticHomeMenu_floors', 'the string of your choice'],
+  ['semanticHomeMenu_rooms', 'the string of your choice'],
+  ['semanticHomeMenu_security', 'the string of your choice'],
+  ['semanticHomeMenu_scenes', 'the string of your choice'],
+  ['semanticHomeMenu_appliances', 'the string of your choice'],
+  ['semanticHomeMenu_energy', 'the string of your choice'],
+  ['semanticHomeMenu_system', 'the string of your choice'],
+  ['semanticHomeMenu_lights', 'the string of your choice'],
+  ['semanticHomeMenu_rollers', 'the string of your choice'],
+  ['semanticHomeMenu_climate', 'the string of your choice'],
+  ['semanticHomeMenu_batteryAttention', 'the string of your choice'],
+  ['semanticHomeMenu_batteries', 'the string of your choice'],
+  ['semanticHomeMenu_armedHome', 'the string of your choice'],
+  ['semanticHomeMenu_disarmed', 'the string of your choice'],
+  ['semanticHomeMenu_armedAway', 'the string of your choice'],
+  ['semanticHomeMenu_smokeDetectors', 'the string of your choice'],
+  ['semanticHomeMenu_motionDetectors', 'the string of your choice'],
+  ['semanticHomeMenu_surveillance', 'the string of your choice'],
+  ['semanticHomeMenu_blinds', 'the string of your choice'],
+  ['semanticHomeMenu_doors', 'the string of your choice'],
+  ['semanticHomeMenu_windows', 'the string of your choice'],
+  ['semanticHomeMenu_municipality', 'the string of your choice']
+]
+
+for (var x = 0; x < stringarray.length; x++) {
+  items[stringarray[x][0]].postUpdate(stringarray[x][1])
+}
+```
+
+The drawback of these string items is that  that their value is changed to `NULL` when openHAB restarts. There are few solutions for this problem:
+1. Create a rule that is triggered on a system event (e.g. level 80 (Things initialized)). The code might be the JavaScript code mentioned above.
+2. Install and configure [`MapDB` persistence](https://www.openhab.org/addons/persistence/mapdb/) to keep track of the latest value of all member items of `gSemanticHomeMenu_strings`, and have these values restored on openHAB restart.
+
 
 ## Community
 Please check [openHAB community]for discussions and proposals.
