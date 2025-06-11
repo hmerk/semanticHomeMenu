@@ -162,7 +162,15 @@ var stringarray = [
   ['semanticHomeMenu_blinds', 'the string of your choice'],
   ['semanticHomeMenu_doors', 'the string of your choice'],
   ['semanticHomeMenu_windows', 'the string of your choice'],
-  ['semanticHomeMenu_municipality', 'the string of your choice']
+  ['semanticHomeMenu_municipality', 'the string of your choice']?
+  ['semanticHomeMenu_noMotion', 'the string of your choice'],
+  ['semanticHomeMenu_motion', 'the string of your choice'],
+  ['semanticHomeMenu_open', 'the string of your choice'],
+  ['semanticHomeMenu_closed', 'the string of your choice'],
+  ['semanticHomeMenu_alarm', 'the string of your choice'],
+  ['semanticHomeMenu_ok', 'the string of your choice'],
+  ['semanticHomeMenu_on', 'the string of your choice'],
+  ['semanticHomeMenu_off', 'the string of your choice'],
 ]
 
 for (var x = 0; x < stringarray.length; x++) {
