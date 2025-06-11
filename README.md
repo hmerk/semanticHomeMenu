@@ -138,7 +138,7 @@ String                        semanticHomeMenu_municipality                 "The
 ```
 
 If you want to use translated labels, update their state e.g. by running a script like this JavaScript code:
-```js
+```
 var stringarray = [
   ['semanticHomeMenu_home', 'the string of your choice'],
   ['semanticHomeMenu_floors', 'the string of your choice'],
