@@ -328,7 +328,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.doorMember.name].state != "CLOSED" ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
+                                      after: '=items[loop.doorMember.name].state != "CLOSED" ? ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
                                       icon: material:sensor_door
                                       iconColor: '=items[loop.doorMember.name].state != "CLOSED" ? "red" : "gray"'
                                       item: =loop.doorMember.name
@@ -370,7 +370,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.windowMember.name].state != "CLOSED" ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
+                                      after: '=items[loop.windowMember.name].state != "CLOSED" ? ((items.semanticHomeMenu_open.state != "-" && items.semanticHomeMenu_open.state != "NULL") ? items.semanticHomeMenu_open.state : "OPEN") : ((items.semanticHomeMenu_closed.state != "-" && items.semanticHomeMenu_closed.state != "NULL") ? items.semanticHomeMenu_closed.state : "CLOSED")'
                                       icon: material:sensor_window
                                       iconColor: '=items[loop.windowMember.name].state != "CLOSED" ? "red" : "gray"'
                                       item: =loop.windowMember.name
