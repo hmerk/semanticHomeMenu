@@ -157,7 +157,7 @@ slots:
                                 default:
                                   - component: oh-list-item
                                     config:
-                                      after: '=items[loop.smokeSensorMember.name].state != "ON" ? ((items.semanticHomeMenu_noMotion.state != "-" && items.semanticHomeMenu_noMotion.state != "NULL") ? items.semanticHomeMenu_noMotion.state : "NO-Motion") : ((items.semanticHomeMenu_motion.state != "-" && items.semanticHomeMenu_motion.state != "NULL") ? items.semanticHomeMenu_motion.state : "MOTION")'
+                                      after: '=items[loop.smokeSensorMember.name].state != "ON" ? ((items.semanticHomeMenu_alarm.state != "-" && items.semanticHomeMenu_alarm.state != "NULL") ? items.semanticHomeMenu_alarm.state : "ALARM") : ((items.semanticHomeMenu_ok.state != "-" && items.semanticHomeMenu_ok.state != "NULL") ? items.semanticHomeMenu_ok.state : "OK")'
                                       icon: '=items[loop.smokeSensorMember.name].state != "OFF" ? "iconify:material-symbols:detector-alarm" : "iconify:material-symbols:detector-smoke"'
                                       iconColor: '=items[loop.smokeSensorMember.name].state != "OFF" ? "red" : "gray"'
                                       item: =loop.smokeSensorMember.name
