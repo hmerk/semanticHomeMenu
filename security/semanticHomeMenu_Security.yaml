@@ -26,6 +26,7 @@ slots:
         default:
           - component: f7-row
             config:
+              visible: '=items.securityGroup_PINused.state == "ON" ? "true" : "false"'
               style:
                 justify-content: space-between
             slots:

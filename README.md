@@ -92,18 +92,6 @@ Group                         gTerrace                                      "Ter
 269
 ```
 
-For some group items of the security widget, you might not have member items. You should still make the group items, otherwise you'll receive a lot of log entries like `[WARN] ... Attempting to send a state update of an item which doesn't exist: gDoorsOpen`.
-These categories will be invisible in the security widget though, as long as the state of the empty group items is `0.0`. That is the state that openHAB gives to empty group items. However, it's possible this doesn't happen immediately, so you might want to update these states yourself (e.g. in the console with command `openhab:update gBlindsOpen 0.0`).
-```
-Group:Number:COUNT(ON)        gSmokeAlarm                                   "Smokealarm"                     <smoke>
-Group:Number:COUNT(ON)        gBatteryLow                                   "Empty Batteries"                <lowbattery>
-Group:Number:COUNT(OPEN)      gWindowsOpen                                  "Windows Open"                                         
-Group:Number:COUNT(OPEN)      gDoorsOpen                                    "Doors Open"                                           
-Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"                                      
-Group:Number:COUNT(ON)        gCamerasDetecting                             "Cameras Detecting something"                          
-Group:Number:COUNT(ON)        gBlindsOpen                                   "Blinds open"                                          
-```
-
 ## Community
 Please check [openHAB community]for discussions and proposals.
 
