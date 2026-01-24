@@ -1,0 +1,1565 @@
+uid: semanticHomeMenu
+tags:
+  - improvements Nico_R and hmerk
+  - openHAB 5.1
+props:
+  parameters:
+    - default: orange
+      description: ColorScheme for Widgets
+      label: Color
+      name: color
+      required: true
+      limitToOptions: true
+      options:
+        - label: Orange
+          value: orange
+        - label: Red
+          value: red
+        - label: Cyan
+          value: cyan
+    - description: Set color for Bottom NavBar
+      label: Bottom-Navbar-Color
+      name: bnavColor
+      required: false
+      type: TEXT
+timestamp: Jan 21, 2026, 9:53:08 PM
+component: f7-block
+config:
+  style:
+    --my-bottom-navbar-background: '=!props.bnavColor ? "RGB(96, 96, 96)" : props.bnavColor'
+    --my-hex-colorScheme: '=props.color =="red" ? "#FF0000" : props.color =="cyan" ?
+      "#03FFFF" :"#FF9900"'
+    --my-rgb-colorScheme: '=props.color =="red" ? "RGB(255,0,0)" : props.color
+      =="cyan" ? "RGB(3,255,255)" : "RGB(255,153,0)"'
+    --my-text-colorScheme: =props.color
+    background: =(themeOptions.dark=="light") ? ("white"):("black")
+    height: 90vh
+    margin: 0
+    padding: 0
+    width: 100%
+  stylesheet: >
+    .invisible {
+      display: none;
+      /*position: absolute;*/
+      /*left: -999em;*/
+      /*opacity: 0.1;*/
+    }
+
+    .container {
+        height: 100%;
+        display: grid; 
+        grid-template-columns: 100%; 
+        grid-template-rows: min-content 1fr auto; 
+        gap: 10px 0px;
+        margin: 0 !important;
+        padding: calc(15px + var(--f7-safe-area-top)) 0px var(--f7-safe-area-bottom) 0px !important;
+        grid-template-areas: 
+          "header"
+          "main"
+          "footer";
+        }
+    .header {
+        grid-area: header;
+
+        margin: 0;
+        overflow: hidden;
+        }
+    .main {
+        grid-area: main;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        }
+    .main::-webkit-scrollbar {
+        display: none;
+        }
+    .footer {
+        grid-area: footer; 
+        overflow: hidden;
+        background: var(--my-bottom-navbar-background);
+        }
+    .mainWidget {
+        --f7-theme-color: #FBBF02;
+        --f7-theme-color-rgb: 251, 191, 2;
+        /*toggles*/
+        --f7-toggle-active-color: #545454;
+        --f7-toggle-inactive-color: #B9B9B9;
+        /*Custom Vars*/
+        /*--tobNavbar Buttons*/
+        --mW-topNavbar-button-color-selected: #262626;
+        --mW-topNavbar-button-color-unselected: #B9B9B9;
+        --mW-topNavbar-button-underline-color: var(--f7-theme-color);
+        /*--tobNavbar Swiper*/
+        --mW-topNavbar-swiper-navigation-color: #898989;
+        --mW-topNavbar-swiper-navigation-size: 20px;
+        }
+    .mainWidget .topNavbar .button {
+        --f7-button-hover-bg-color: transparent;
+        --f7-button-pressed-bg-color: rgba(var(--f7-theme-color-rgb), .07);
+        --f7-button-text-color: var(--mW-topNavbar-button-color-unselected);
+        --f7-button-text-transform: none;
+        font-size: 16px;
+        width: auto; 
+        }
+    .mainWidget .topNavbar .selected_menu_item {
+        color: var(--mW-topNavbar-button-color);
+        text-decoration-color: var(--mW-topNavbar-button-underline-color) !important;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        }
+    .mainWidget .topNavbar .unselected_menu_item {
+        color: var(--mW-topNavbar-button-color-unselected);
+        font-weight: 300;
+        }
+    .mainWidget .topNavbar .swiper-button-prev, .mainWidget .topNavbar
+    .swiper-button-next {
+        width: 100%;
+        height: 40px;
+        }
+    .mainWidget .topNavbar .swiper-button-prev {
+        padding-right: 20px;
+        justify-content: right;
+        }
+    .mainWidget .topNavbar .swiper-button-next {
+        padding-left: 20px;
+        justify-content: left;
+        }
+slots:
+  default:
+    - component: f7-block
+      config:
+        class:
+          - container
+          - mainWidget
+      slots:
+        default:
+          - component: f7-block
+            config:
+              class:
+                - no-padding
+                - header
+                - topNavbar
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    style:
+                      height: auto
+                      justify-content: center
+                      margin-left: 2%
+                      margin-right: 2%
+                  slots:
+                    default:
+                      - component: oh-repeater
+                        config:
+                          cacheSource: true
+                          for: baseMenu
+                          fragment: true
+                          in:
+                            - name: =translation('Home')
+                            - name: =translation('Floor')
+                            - name: =translation('Room')
+                          sourceType: array
+                        slots:
+                          default:
+                            - component: oh-button
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  selectSection: ="SECTION" + loop.baseMenu_idx
+                                class:
+                                  - '=vars.objVar ? "" : "unselected_menu_item"'
+                                  - '=vars.objVar.selectSection=="SECTION" +
+                                    loop.baseMenu_idx ? "selected_menu_item" :
+                                    "unselected_menu_item"'
+                                large: true
+                                style:
+                                  font-size: 24px
+                                  width: auto
+                                text: =loop.baseMenu.name
+                - component: f7-row
+                  config:
+                    class:
+                      - align-items-stretch
+                      - display-flex
+                    style:
+                      display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION1") ? "" : "none
+                        !important" : "none !important"'
+                      height: auto
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-right
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-prev
+                                id: floorsPrev
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - align-items-center
+                          style:
+                            flex-grow: 1
+                        slots:
+                          default:
+                            - component: f7-swiper
+                              config:
+                                params:
+                                  breakpoints:
+                                    "0":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "240":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "320":
+                                      slidesPerGroup: 2
+                                      slidesPerView: 2
+                                      spaceBetween: 0
+                                    "480":
+                                      slidesPerGroup: 3
+                                      slidesPerView: 3
+                                      spaceBetween: 0
+                                    "640":
+                                      slidesPerGroup: 4
+                                      slidesPerView: 4
+                                      spaceBetween: 0
+                                    "940":
+                                      slidesPerGroup: 5
+                                      slidesPerView: 5
+                                      spaceBetween: 0
+                                    "1400":
+                                      slidesPerGroup: 6
+                                      slidesPerView: 6
+                                      spaceBetween: 0
+                                    "1800":
+                                      slidesPerGroup: 8
+                                      slidesPerView: 8
+                                      spaceBetween: 0
+                                  centerInsufficientSlides: true
+                                  grabCursor: true
+                                  keyboard: true
+                                  mousewheel: true
+                                  navigation:
+                                    nextEl: "#floorsNext"
+                                    prevEl: "#floorsPrev"
+                                  observeSlideChildren: true
+                                  observer: true
+                                  runCallbacksOnInit: true
+                                  updateOnWindowResize: true
+                                  watchOverflow: true
+                                style:
+                                  width: 100%
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      cacheSource: true
+                                      fetchMetadata: metadata,semantics,widgetOrder
+                                      filter: (loop.floorArray.metadata) &&
+                                        (loop.floorArray.metadata.semantics.value).includes("Floor")
+                                      for: floorArray
+                                      fragment: true
+                                      itemTags: ","
+                                      sourceType: itemsWithTags
+                                    slots:
+                                      default:
+                                        - component: f7-swiper-slide
+                                          config:
+                                            expandable: true
+                                            style:
+                                              border-radius: 5px
+                                          slots:
+                                            default:
+                                              - component: oh-button
+                                                config:
+                                                  action: variable
+                                                  actionVariable: objVar
+                                                  actionVariableValue:
+                                                    floor: =loop.floorArray.name
+                                                    selectSection: SECTION2
+                                                  class:
+                                                    - '=vars.objVar ? "" :
+                                                      "unselected_menu_item"'
+                                                    - '=(vars.objVar.floor ==
+                                                      loop.floorArray.name) ?
+                                                      "selected_menu_item" :
+                                                      "unselected_menu_item"'
+                                                  text: =loop.floorArray.label
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-center
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-next
+                                id: floorsNext
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                - component: f7-row
+                  config:
+                    class:
+                      - align-items-stretch
+                    style:
+                      display: '=!vars.objVar ? "none !important" :
+                        (vars.objVar.selectSection=="SECTION2" &&
+                        !vars.objVar.floor) ? "" : "none !important"'
+                      height: auto
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-center
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-prev
+                                id: allRoomsPrev
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - align-items-center
+                          style:
+                            flex-grow: 1
+                        slots:
+                          default:
+                            - component: f7-swiper
+                              config:
+                                params:
+                                  breakpoints:
+                                    "0":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "240":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "320":
+                                      slidesPerGroup: 2
+                                      slidesPerView: 2
+                                      spaceBetween: 0
+                                    "480":
+                                      slidesPerGroup: 3
+                                      slidesPerView: 3
+                                      spaceBetween: 0
+                                    "640":
+                                      slidesPerGroup: 4
+                                      slidesPerView: 4
+                                      spaceBetween: 0
+                                    "940":
+                                      slidesPerGroup: 5
+                                      slidesPerView: 5
+                                      spaceBetween: 0
+                                    "1400":
+                                      slidesPerGroup: 6
+                                      slidesPerView: 6
+                                      spaceBetween: 0
+                                    "1800":
+                                      slidesPerGroup: 8
+                                      slidesPerView: 8
+                                      spaceBetween: 0
+                                  centerInsufficientSlides: true
+                                  grabCursor: true
+                                  keyboard: true
+                                  mousewheel: true
+                                  navigation:
+                                    nextEl: "#allRoomsNext"
+                                    prevEl: "#allRoomsPrev"
+                                  observeParents: true
+                                  observeSlideChildren: true
+                                  observer: true
+                                  runCallbacksOnInit: true
+                                  updateOnWindowResize: true
+                                  watchOverflow: true
+                                style:
+                                  width: 100%
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      cacheSource: true
+                                      fetchMetadata: metadata,semantics,widgetOrder
+                                      filter: (loop.roomArray.metadata) &&
+                                        ((loop.roomArray.metadata.semantics.value).includes("Room")  ||
+                                        (loop.roomArray.metadata.semantics.value).includes("Corridor"))
+                                      for: roomArray
+                                      fragment: true
+                                      itemTags: ","
+                                      sourceType: itemsWithTags
+                                    slots:
+                                      default:
+                                        - component: f7-swiper-slide
+                                          config:
+                                            style:
+                                              border-radius: 5px
+                                          slots:
+                                            default:
+                                              - component: oh-button
+                                                config:
+                                                  action: variable
+                                                  actionVariable: objVar
+                                                  actionVariableValue:
+                                                    floor: =vars.objVar.floor
+                                                    room: =loop.roomArray.name
+                                                    selectSection: =vars.objVar.selectSection
+                                                  class:
+                                                    - '=vars.objVar ? "" :
+                                                      "unselected_menu_item"'
+                                                    - '=(vars.objVar.room ==
+                                                      loop.roomArray.name) ?
+                                                      "selected_menu_item" :
+                                                      "unselected_menu_item"'
+                                                  text: =loop.roomArray.label
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-center
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-next
+                                id: allRoomsNext
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                - component: f7-row
+                  config:
+                    class:
+                      - align-items-stretch
+                    style:
+                      display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION2" &&
+                        vars.objVar.floor ) ? "" : "none !important" : "none
+                        !important"'
+                      height: auto
+                      width: 100%
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-center
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-prev
+                                id: roomsOfFloorPrev
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - align-items-center
+                          style:
+                            flex-grow: 1
+                        slots:
+                          default:
+                            - component: f7-swiper
+                              config:
+                                params:
+                                  breakpoints:
+                                    "0":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "240":
+                                      slidesPerView: 1
+                                      spaceBetween: 0
+                                    "320":
+                                      slidesPerGroup: 2
+                                      slidesPerView: 2
+                                      spaceBetween: 0
+                                    "480":
+                                      slidesPerGroup: 3
+                                      slidesPerView: 3
+                                      spaceBetween: 0
+                                    "640":
+                                      slidesPerGroup: 4
+                                      slidesPerView: 4
+                                      spaceBetween: 0
+                                    "940":
+                                      slidesPerGroup: 5
+                                      slidesPerView: 5
+                                      spaceBetween: 0
+                                    "1400":
+                                      slidesPerGroup: 6
+                                      slidesPerView: 6
+                                      spaceBetween: 0
+                                    "1800":
+                                      slidesPerGroup: 8
+                                      slidesPerView: 8
+                                      spaceBetween: 0
+                                  centerInsufficientSlides: true
+                                  grabCursor: true
+                                  keyboard: true
+                                  mousewheel: true
+                                  navigation:
+                                    nextEl: "#roomsOfFloorNext"
+                                    prevEl: "#roomsOfFloorPrev"
+                                  observeSlideChildren: true
+                                  observer: true
+                                  runCallbacksOnInit: true
+                                  updateOnWindowResize: true
+                                  watchOverflow: true
+                                style:
+                                  width: 100%
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      cacheSource: true
+                                      fetchMetadata: metadata,semantics,widgetOrder
+                                      filter: (loop.roomArray.metadata) &&
+                                        ((loop.roomArray.metadata.semantics.value).includes("Room")
+                                        ||
+                                        (loop.roomArray.metadata.semantics.value).includes("Corridor"))
+                                        &&
+                                        ((loop.roomArray.metadata.semantics.config.isPartOf).includes(vars.objVar.floor))
+                                      for: roomArray
+                                      fragment: true
+                                      itemTags: ","
+                                      sourceType: itemsWithTags
+                                    slots:
+                                      default:
+                                        - component: f7-swiper-slide
+                                          config:
+                                            style:
+                                              border-radius: 5px
+                                          slots:
+                                            default:
+                                              - component: oh-button
+                                                config:
+                                                  action: variable
+                                                  actionVariable: objVar
+                                                  actionVariableValue:
+                                                    floor: =vars.objVar.floor
+                                                    room: =loop.roomArray.name
+                                                    selectSection: =vars.objVar.selectSection
+                                                  class:
+                                                    - '=vars.objVar ? "" :
+                                                      "unselected_menu_item"'
+                                                    - '=(vars.objVar.room ==
+                                                      loop.roomArray.name) ?
+                                                      "selected_menu_item" :
+                                                      "unselected_menu_item"'
+                                                  text: =loop.roomArray.label
+                      - component: f7-col
+                        config:
+                          class:
+                            - display-flex
+                            - justify-content-center
+                            - align-items-stretch
+                          style:
+                            width: 15%
+                        slots:
+                          default:
+                            - component: f7-block
+                              config:
+                                class:
+                                  - swiper-button-next
+                                id: roomsOfFloorNext
+                                style:
+                                  --swiper-navigation-color: var(--mW-topNavbar-swiper-navigation-color)
+                                  --swiper-navigation-size: var(--mW-topNavbar-swiper-navigation-size)
+                                  position: inherit
+                - component: f7-row
+                  config:
+                    style:
+                      display: '=!vars.objVar ? "none !important": !vars.objVar.floor ? "none
+                        !important" : ""'
+                      height: auto
+                      justify-content: center
+                      width: 100%
+                  slots:
+                    default:
+                      - component: oh-repeater
+                        config:
+                          cacheSource: true
+                          fetchMetadata: semantics,metadata,widgetOrder
+                          filter: ((loop.floorItem.metadata) &&
+                            (loop.floorItem.metadata.semantics.value).includes("Floor"))
+                            && (loop.floorItem.name == vars.objVar.floor)
+                          for: floorItem
+                          itemTags: ","
+                          sourceType: itemsWithTags
+                        slots:
+                          default:
+                            - component: f7-chip
+                              config:
+                                style:
+                                  background: "#F8BB00"
+                                text: =loop.floorItem.label
+          - component: f7-block
+            config:
+              class:
+                - main
+                - no-margin
+                - no-padding
+            slots:
+              default:
+                - component: widget:semanticHomeMenu_Weather
+                  config:
+                    visible: '=(!vars.objVar || ((vars.objVar.selectSection=="SECTION0") &&
+                      !vars.objVar.selectThing)) ? true : false'
+                - component: oh-repeater
+                  config:
+                    cacheSource: true
+                    fetchMetadata: semantics,metadata
+                    for: securityGroup
+                    itemTags: AlarmSystem
+                    sourceType: itemsWithTags
+                  slots:
+                    default:
+                      - component: widget:semanticHomeMenu_Security
+                        config:
+                          securityGroup: =loop.securityGroup.name
+                          visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                            vars.objVar.selectThing)=="SECTION0Security") ? true
+                            : false : false'
+                - component: oh-repeater
+                  config:
+                    cacheSource: true
+                    for: scene
+                    ruleTags: Scene
+                    sourceType: rulesWithTags
+                  slots:
+                    default:
+                      - component: widget:semanticHomeMenu_Scenes
+                        config:
+                          colorScheme: var(--my-text-colorScheme)
+                          sceneName: =loop.scene.name
+                          sceneUID: =loop.scene.UID
+                          visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                            vars.objVar.selectThing)=="SECTION0Scenes") ? true :
+                            false : false'
+                - component: widget:semanticHomeMenu_Appliances
+                  config:
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                      vars.objVar.selectThing)=="SECTION0Appliances") ? true :
+                      false : false'
+                - component: widget:semanticHomeMenu_ElectricityMeter
+                  config:
+                    groupItem: ElectricityMeter
+                    groupItemLabel: Smart Meter 1EMH0013125552
+                    meterType: Energy
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                      vars.objVar.selectThing)=="SECTION0Energy") ? true : false
+                      : false'
+                - component: widget:semanticHomeMenu_EMS
+                  config:
+                    groupItem: ElectricityMeter
+                    groupItemLabel: Electricity Management System
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                      vars.objVar.selectThing)=="SECTION0Energy") ? true : false
+                      : false'
+                - component: widget:semanticHomeMenu_System
+                  config:
+                    visible: '=vars.objVar ? ((vars.objVar.selectSection +
+                      vars.objVar.selectThing)=="SECTION0System") ? true : false
+                      : false'
+                - component: f7-row
+                  config:
+                    class:
+                      - justify-content-center
+                      - '=vars.objVar ? (vars.objVar.selectSection=="SECTION0")
+                        ? "" : "" : "invisible"'
+                  slots:
+                    default:
+                      - component: oh-repeater
+                        config:
+                          cacheSource: true
+                          fetchMetadata: semantics,widgetOrder
+                          filter: (loop.floors.metadata) &&
+                            (loop.floors.metadata.semantics.value).includes("Floor")
+                          for: floors
+                          fragment: true
+                          itemTags: ","
+                          sourceType: itemsWithTags
+                        slots:
+                          default:
+                            - component: oh-repeater
+                              config:
+                                cacheSource: true
+                                fetchMetadata: semantics
+                                filter: (loop.rooms.metadata) &&
+                                  ((loop.rooms.metadata.semantics.value).includes("Room")  ||
+                                  (loop.rooms.metadata.semantics.value).includes("Corridor"))
+                                for: rooms
+                                fragment: true
+                                groupItem: =loop.floors.name
+                                sourceType: itemsInGroup
+                              slots:
+                                default:
+                                  - component: oh-repeater
+                                    config:
+                                      cacheSource: true
+                                      for: roomsSrc
+                                      fragment: true
+                                      in: =loop.rooms_source
+                                      sourceType: array
+                                      visible: =loop.rooms_idx == "0"
+                                    slots:
+                                      default:
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: Lightbulb
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Lights" ||
+                                                      !vars.objVar.selectThing
+                                                      )) ? "visible" :
+                                                      "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: Lightbulb
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: DimmableLight
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Lights" ||
+                                                      !vars.objVar.selectThing
+                                                      )) ? "visible" :
+                                                      "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: DimmableLight
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: ColorLight
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Lights" ||
+                                                      !vars.objVar.selectThing
+                                                      )) ? "visible" :
+                                                      "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: ColorLight
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: Lightstripe
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Lights" ||
+                                                      !vars.objVar.selectThing
+                                                      )) ? "visible" :
+                                                      "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Lights
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        equipmentType: ColorLight
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: Blinds
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Rollers")) ? "visible"
+                                                      : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_Rollershutter
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: RadiatorControl
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Climate")) ? "visible"
+                                                      : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_RadiatorControl
+                                                      config:
+                                                        colorScheme: var(--my-text-colorScheme)
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+                                                        hexColorScheme: var(--my-hex-colorScheme)
+                                        - component: oh-repeater
+                                          config:
+                                            cacheSource: true
+                                            fetchMetadata: semantics,uiSemantics,widgetOrder
+                                            filter: (loop.equipmentItem.metadata.semantics.config) &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation)
+                                              &&
+                                              (loop.equipmentItem.metadata.semantics.config.hasLocation
+                                              == loop.roomsSrc.name)
+                                            for: equipmentItem
+                                            fragment: true
+                                            itemTags: HVAC
+                                            sourceType: itemsWithTags
+                                          slots:
+                                            default:
+                                              - component: f7-col
+                                                config:
+                                                  class:
+                                                    - '=((vars.objVar.room ==
+                                                      loop.equipmentItem.metadata.semantics.config.hasLocation
+                                                      ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      !vars.objVar.floor &&
+                                                      !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION2" &&
+                                                      vars.objVar.floor ==
+                                                      loop.rooms.metadata.semantics.config.isPartOf
+                                                      && !vars.objVar.room) ||
+                                                      (vars.objVar.selectSection
+                                                      == "SECTION1")) &&
+                                                      (vars.objVar.selectThing
+                                                      == "Climate")) ? "visible"
+                                                      : "invisible"'
+                                                  large: 50
+                                                  medium: 50
+                                                  small: 90
+                                                  style:
+                                                    overflow: hidden
+                                                  width: 100
+                                                  xlarge: 33
+                                                  xsmall: 100
+                                                slots:
+                                                  default:
+                                                    - component: widget:semanticHomeMenu_HVAC
+                                                      config:
+                                                        groupItem: =loop.equipmentItem.name
+                                                        groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.equipment :
+                                                          loop.equipmentItem.la\
+                                                          bel"
+                                                        groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ?
+                                                          loop.equipmentItem.me\
+                                                          tadata.uiSemantics.co\
+                                                          nfig.location :
+                                                          loop.roomsSrc.label"
+          - component: f7-block
+            config:
+              class:
+                - no-margin
+                - no-padding
+                - footer
+              style:
+                display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION0") ? "" : "none
+                  !important" : "none !important"'
+                width: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      flex-direction: row
+                      height: 100%
+                      justify-content: space-around
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Security" ? undefined : "Security"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Security" ? "var(--f7-toggle-active-color)"
+                                    : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:carbon:security
+                                  - component: f7-badge
+                                    config:
+                                      bgColor: red
+                                      style:
+                                        --f7-badge-size: 16px
+                                        font-size: var(--f7-badge-in-icon-font-size)
+                                        margin-left: 48px
+                                        margin-top: -38px
+                                        position: absolute
+                                      visible: =(Number(items.gDoorsOpen.state) +Number(items.gWindowsOpen.state) +
+                                        Number(items.gSmokeAlarm.state) +
+                                        Number(items.gMotionDetected.state)) > 0
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            text: =(Number(items.gDoorsOpen.state) + Number(items.gWindowsOpen.state) +
+                                              Number(items.gSmokeAlarm.state) +
+                                              Number(items.gMotionDetected.state))
+                                  - component: Label
+                                    config:
+                                      text: =translation('AlarmSystem')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Scenes" ? undefined : "Scenes"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Scenes" ? "var(--f7-toggle-active-color)" :
+                                    "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:heroicons:rectangle-stack
+                                  - component: Label
+                                    config:
+                                      text: =translation('Scenes')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Appliances" ? undefined :
+                                    "Appliances"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Appliances"
+                                    ?  "var(--f7-toggle-active-color)" :
+                                    "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:bi:plugin
+                                  - component: Label
+                                    config:
+                                      text: =translation('home.equipment.title')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Energy" ? undefined : "Energy"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Energy" ?  "var(--f7-toggle-active-color)"
+                                    : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:simple-line-icons:energy
+                                  - component: f7-badge
+                                    config:
+                                      bgColor: red
+                                      style:
+                                        --f7-badge-size: 16px
+                                        font-size: var(--f7-badge-in-icon-font-size)
+                                        margin-left: 48px
+                                        margin-top: -38px
+                                        position: absolute
+                                      visible: =(Number(items.gBatteryLowTotal.state)) > 0
+                                    slots:
+                                      default:
+                                        - component: Label
+                                          config:
+                                            text: =(Number(items.gBatteryLowTotal.state))
+                                  - component: Label
+                                    config:
+                                      text: =translation('Energy')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "System" ? undefined : "System"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "System" ?  "var(--f7-toggle-active-color)"
+                                    : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:simple-line-icons:info
+                                  - component: Label
+                                    config:
+                                      text: =translation('System')
+          - component: f7-block
+            config:
+              class:
+                - no-margin
+                - no-padding
+                - footer
+              style:
+                display: '=vars.objVar ? (vars.objVar.selectSection=="SECTION0") ? "none
+                  !important" : "" : "none !important"'
+                width: 100%
+            slots:
+              default:
+                - component: f7-row
+                  config:
+                    class:
+                      - display-flex
+                    style:
+                      flex-direction: row
+                      height: 100%
+                      justify-content: space-around
+                  slots:
+                    default:
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Lights" ? undefined : "Lights"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Lights" ? "var(--f7-toggle-active-color)" :
+                                    "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:clarity:lightbulb-line
+                                  - component: Label
+                                    config:
+                                      text: =translation('Light')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Rollers" ? undefined : "Rollers"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Rollers" ? "var(--f7-toggle-active-color)"
+                                    : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 100%
+                                      icon: iconify:mdi:window-shutter
+                                  - component: Label
+                                    config:
+                                      text: =translation('Blinds')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Climate" ? undefined : "Climate"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Climate" ?  "var(--f7-toggle-active-color)"
+                                    : "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:ph:thermometer-hot-light
+                                  - component: Label
+                                    config:
+                                      text: =translation('HVAC')
+                      - component: f7-col
+                        config:
+                          style:
+                            height: 70px
+                            min-width: 50px
+                        slots:
+                          default:
+                            - component: oh-link
+                              config:
+                                action: variable
+                                actionVariable: objVar
+                                actionVariableValue:
+                                  floor: =vars.objVar.floor
+                                  room: =vars.objVar.room
+                                  selectSection: =vars.objVar.selectSection
+                                  selectThing: '=vars.objVar.selectThing == "Appliances" ? undefined :
+                                    "Appliances"'
+                                class:
+                                  - padding-half
+                                style:
+                                  color: '=vars.objVar.selectThing == "Appliances"
+                                    ?  "var(--f7-toggle-active-color)" :
+                                    "var(--f7-toggle-inactive-color)"'
+                                  display: flex
+                                  flex-direction: column
+                                  height: 100%
+                              slots:
+                                default:
+                                  - component: oh-icon
+                                    config:
+                                      height: 80%
+                                      icon: iconify:bi:plugin
+                                  - component: Label
+                                    config:
+                                      text: =translation('home.equipment.title')
