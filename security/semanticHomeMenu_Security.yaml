@@ -26,6 +26,7 @@ slots:
         default:
           - component: f7-row
             config:
+              visible: '=items.securityGroup_PINused.state == "ON" ? "true" : "false"'
               style:
                 justify-content: space-between
             slots:
@@ -124,6 +125,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gSmokeAlarm.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item
@@ -166,6 +168,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gMotionDetected.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item
@@ -191,7 +194,6 @@ slots:
                                 accordionList: true
                                 cacheSource: true
                                 fetchMetadata: semantics,widgetOrder,uiSemantics
-                                filter: '(loop.motionDetector.category=="motion") ? true : false'
                                 for: motionDetector
                                 fragment: true
                                 groupItem: gMotionDetected
@@ -209,6 +211,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gCamerasDetecting.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item
@@ -234,11 +237,10 @@ slots:
                                 accordionList: true
                                 cacheSource: true
                                 fetchMetadata: semantics,widgetOrder,uiSemantics
-                                filter: '(loop.surveilance.category=="switch") || (loop.surveilance.category=="Switch") ? true : false'
                                 for: surveilance
                                 fragment: true
-                                itemTags: Camera
-                                sourceType: itemsWithTags
+                                groupItem: gCamerasDetecting
+                                sourceType: itemsInGroup
                               slots:
                                 default:
                                   - component: oh-list-item
@@ -252,6 +254,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gBlindsOpen.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item
@@ -277,11 +280,10 @@ slots:
                                 accordionList: true
                                 cacheSource: true
                                 fetchMetadata: semantics,widgetOrder,uiSemantics
-                                filter: '((loop.shadesMember.category == "rollershutter") || ((loop.shadesMember.category).includes("Rollershutter"))) ? true : false'
                                 for: shadesMember
                                 fragment: true
-                                itemTags: Opening
-                                sourceType: itemsWithTags
+                                groupItem: gBlindsOpen
+                                sourceType: itemsInGroup
                               slots:
                                 default:
                                   - component: oh-list-item
@@ -295,6 +297,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gDoorsOpen.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item
@@ -337,6 +340,7 @@ slots:
             config:
               accordionList: true
               mediaList: true
+              visible: '=items.gWindowsOpen.state != "0.0" ? "true" : "false"'
             slots:
               default:
                 - component: oh-list-item

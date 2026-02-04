@@ -61,7 +61,7 @@ The red indicator badges are shown if there is any alarm, whether security or lo
   * [Weather forecast](https://community.openhab.org/t/oh3-main-ui-examples/117928/30)
   
 ### Usage
-For complete usage of this project, you need to create some groups (equiments) in your semantic model, see the following example for textual item import (change to your individual needs)
+For complete usage of this project, you need to create some groups (equiments) in your semantic model, see the following example for textual item import (change to your individual needs).
 ```csv
 Group                         gHome                                         "Home"                                                                                                       ["Building"]
 Group                         gIndoor                                       "Building"                       <house>               (gHome)                                               ["Indoor"]
@@ -89,13 +89,21 @@ Group                         gHobbyroom                                    "Hob
 Group                         gGarden                                       "Garden"                         <garden>              (gOutdoor)                                            ["Garden"]                         {widgetOrder="51"}
 Group                         gShed                                         "Shed"                           <garden>              (gOutdoor)                                            ["Location"]                       {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Shed", location="Garden"],widgetOrder="52"}
 Group                         gTerrace                                      "Terrace"                        <terrace>             (gOutdoor)                                            ["Room"]                           {uiSemantics="uiSemantics"[preposition=" in the ", equipment="Terrace", location="Garden"],widgetOrder="53"}
+269
+```
+
+For some group items of the security widget, you might not have member items. You should still make the group items, otherwise you'll receive a lot of log entries like `[WARN] ... Attempting to send a state update of an item which doesn't exist: gDoorsOpen`.
+These categories will be invisible in the security widget though, as long as the state of the empty group items is `0.0`. That is the state that openHAB gives to empty group items. However, it's possible this doesn't happen immediately, so you might want to update these states yourself (e.g. in the console with command `openhab:update gBlindsOpen 0.0`).
+```
 Group:Number:COUNT(ON)        gSmokeAlarm                                   "Smokealarm"                     <smoke>
 Group:Number:COUNT(ON)        gBatteryLow                                   "Empty Batteries"                <lowbattery>
 Group:Number:COUNT(OPEN)      gWindowsOpen                                  "Windows Open"                                         
 Group:Number:COUNT(OPEN)      gDoorsOpen                                    "Doors Open"                                           
 Group:Number:COUNT(ON)        gMotionDetected                               "Motion Detected"                                      
+Group:Number:COUNT(ON)        gCamerasDetecting                             "Cameras Detecting something"                          
+Group:Number:COUNT(ON)        gBlindsOpen                                   "Blinds open"                                          
 ```
-These items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar.
+All these items will create the general structure shown in the top navigation menu and will also create the red notification badges in the bottom navigation bar.
 
 ## Community
 Please check [openHAB community]for discussions and proposals.
